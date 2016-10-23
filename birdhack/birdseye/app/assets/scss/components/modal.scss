@@ -30,4 +30,9 @@
   }
 }
 
+.table-nolines {
+  td, th {
+    border: none !important;
+  }
+}
 

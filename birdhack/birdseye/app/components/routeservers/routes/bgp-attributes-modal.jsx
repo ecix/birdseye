@@ -44,7 +44,7 @@ class BgpAttributesModal extends React.Component {
         </Header>
 
         <Body>
-          <table className="table table-compact">
+          <table className="table table-nolines">
            <tbody>
             <tr>
               <th>Origin:</th><td>{attrs.bgp.origin}</td>
@@ -53,7 +53,7 @@ class BgpAttributesModal extends React.Component {
               <th>Local Pref:</th><td>{attrs.bgp.local_pref}</td>
             </tr>
             <tr>
-              <th>Med:</th><td>{attrs.bgp.med}</td>
+              <th>MED:</th><td>{attrs.bgp.med}</td>
             </tr>
             <tr>
               <th>AS Path:</th><td>{attrs.bgp.as_path.join(', ')}</td>

@@ -6,9 +6,20 @@ import PageHeader from 'components/page-header'
 import Details from './details'
 import Status from './status'
 
+import SearchInput from 'components/search-input'
+
 import Protocols from './protocols'
 
+import {setProtocolsFilterValue} from './actions'
+
 class RouteserversPage extends React.Component {
+
+  setFilter(value) {
+    this.props.dispatch(
+      setProtocolsFilterValue(value)
+    );
+  }
+
   render() {
     return(
       <div className="routeservers-page">
@@ -18,6 +29,14 @@ class RouteserversPage extends React.Component {
 
         <div className="row details-main">
           <div className="col-md-8">
+            <div className="card">
+              <SearchInput 
+                value={this.props.protocolsFilterValue}
+                placeholder="Filter by Neightbour, ASN or Description"
+                onChange={(e) => this.setFilter(e.target.value)}
+              />
+            </div>
+
             <div className="card">
               <Protocols protocol="bgp" routeserverId={this.props.params.routeserverId} />
             </div>
@@ -37,6 +56,7 @@ class RouteserversPage extends React.Component {
 export default connect(
   (state) => {
     return {
+      protocolsFilterValue: state.routeservers.protocolsFilterValue
     };
   }
 )(RouteserversPage);

@@ -1,5 +1,7 @@
 
 
+import _ from 'underscore'
+
 import React from 'react'
 import {connect} from 'react-redux'
 
@@ -7,6 +9,24 @@ import {loadRouteserverProtocol}
   from 'components/routeservers/actions'
 
 import {Link} from 'react-router'
+
+
+function _filteredProtocols(protocols, filter) {
+  let filtered = [];
+  if(filter == "") {
+    return protocols; // nothing to do here
+  }
+
+  filter = filter.toLowerCase();
+
+  // Filter protocols
+  filtered = _.filter(protocols, (p) => {
+    return (p.neighbor_address.toLowerCase().indexOf(filter) != -1 ||
+            p.description.toLowerCase().indexOf(filter) != -1);
+  });
+
+  return filtered;
+}
 
 class ProtocolTable extends React.Component {
 
@@ -30,11 +50,20 @@ class ProtocolTable extends React.Component {
       return null;
     }
 
+    protocol = _filteredProtocols(protocol, this.props.filter);
+    if(!protocol || protocol.length == 0) {
+      return (
+        <p className="help-block">
+          No protocols could be found.
+        </p>
+      );
+    }
+
     let neighbours = [];
     for (let id in protocol) {
       let n = protocol[id];
 
-      let routesLink = `/routeservers/${this.props.routeserverId}/protocols/${id}/routes`;
+      let routesLink = `/routeservers/${this.props.routeserverId}/protocols/${n.protocol}/routes`;
       neighbours.push(
         <tr key={id}>
           <td>
@@ -64,7 +93,7 @@ class ProtocolTable extends React.Component {
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>Neighbor</th>
+              <th>Neighbour</th>
               <th>ASN</th>
               <th>State</th>
               <th>Uptime</th>
@@ -82,10 +111,13 @@ class ProtocolTable extends React.Component {
 }
 
 
+
+
 export default connect(
   (state) => {
     return {
-      protocols: state.routeservers.protocols
+      protocols: state.routeservers.protocols,
+      filter: state.routeservers.protocolsFilterValue
     }
   }
 )(ProtocolTable);

@@ -20,8 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Birdseye servers
 #
 BIRDSEYE_SERVERS = [
-    ('routeserver01.ops.ixp', 'http://birdseye.inex.ie/api'),
-    ('routeserver02.ops.ixp', 'http://birdseye.inex.ie/api')
+    ('rc1.cix.inex.ie (IPv4)', 'http://rc1-cix-ipv4.inex.ie/api'),
+    ('rc1.cix.inex.ie (IPv6)', 'http://rc1-cix-ipv6.inex.ie/api'),
+    ('routeserver01.ops.ixp',  'http://birdseye.inex.ie/api'),
 ]
 
 

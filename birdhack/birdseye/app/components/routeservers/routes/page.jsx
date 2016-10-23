@@ -10,7 +10,21 @@ import PageHeader from 'components/page-header'
 
 import Routes     from './routes'
 
+import SearchInput from 'components/search-input'
+
+import BgpAttributesModal
+  from './bgp-attributes-modal'
+
+import {setRoutesFilterValue} from '../actions'
+
 class RoutesPage extends React.Component {
+
+  setFilter(value) {
+    this.props.dispatch(
+      setRoutesFilterValue(value)
+    );
+  }
+
   render() {
     return(
       <div className="routeservers-page">
@@ -20,8 +34,19 @@ class RoutesPage extends React.Component {
           </Link>
         </PageHeader>
 
+        <BgpAttributesModal />
+
         <div className="row details-main">
           <div className="col-md-8">
+
+            <div className="card">
+              <SearchInput 
+                value={this.props.routesFilterValue}
+                placeholder="Filter by Network, Gateway or Interface"
+                onChange={(e) => this.setFilter(e.target.value)}
+              />
+            </div>
+
             <div className="card">
               <Routes routeserverId={this.props.params.routeserverId}
                       protocolId={this.props.params.protocolId} />
@@ -43,7 +68,9 @@ class RoutesPage extends React.Component {
 
 export default connect(
   (state) => {
-    return {}
+    return {
+      routesFilterValue: state.routeservers.routesFilterValue
+    }
   }
 )(RoutesPage);
 

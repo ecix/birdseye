@@ -9,9 +9,13 @@ import { routerReducer } from 'react-router-redux'
 import routeserversReducer
   from 'components/routeservers/reducer'
 
+import bgpAttributesModalReducer
+  from 'components/routeservers/routes/bgp-attributes-modal-reducer'
+
 
 export default combineReducers({
-  routeservers: routeserversReducer,
-  routing:      routerReducer
+  routeservers:       routeserversReducer,
+  bgpAttributesModal: bgpAttributesModalReducer,
+  routing:            routerReducer
 });
 

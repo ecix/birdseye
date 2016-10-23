@@ -5,7 +5,10 @@ import {LOAD_ROUTESERVERS_REQUEST,
         LOAD_ROUTESERVERS_SUCCESS,
         LOAD_ROUTESERVER_STATUS_SUCCESS,
         LOAD_ROUTESERVER_PROTOCOL_SUCCESS,
-        LOAD_ROUTESERVER_ROUTES_SUCCESS}
+        LOAD_ROUTESERVER_ROUTES_SUCCESS,
+
+        SET_PROTOCOLS_FILTER_VALUE,
+        SET_ROUTES_FILTER_VALUE}
   from './actions'
 
 const initialState = {
@@ -13,6 +16,10 @@ const initialState = {
   details: {},
   protocols: {},
   routes: {},
+
+  protocolsFilterValue: "",
+  routesFilterValue: "",
+
   isLoading: false,
 };
 
@@ -53,6 +60,10 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         details: details
       });
+
+    case SET_PROTOCOLS_FILTER_VALUE:
+    case SET_ROUTES_FILTER_VALUE:
+      return Object.assign({}, state, action.payload);
 
   }
   return state;

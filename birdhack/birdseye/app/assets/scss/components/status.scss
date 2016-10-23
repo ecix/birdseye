@@ -1,27 +1,5 @@
 
 
-/*
-.routeserver-status-list {
-  margin: 0px 40px;
-  margin-right: auto;
-
-  display: flex;
-  flex-direction: row;
-
-  justify-content: space-between;
-  align-items: flex-start;
-
-  .routeserver-status {
-    flex: 1;
-  }
-
-
-  .status-name {
-    font-weight: bold;
-  }
-}
-
-*/
 
 .routeserver-status-list {
   .routeserver-status {
@@ -39,6 +17,10 @@
     list-style: none;
     li {
       padding: 10px;
+
+      i {
+        width: 25px;
+      }
     }
 
   }

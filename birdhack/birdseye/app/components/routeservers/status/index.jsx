@@ -2,6 +2,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import Datetime from 'components/datetime'
+
 
 class Details extends React.Component {
 
@@ -20,9 +22,14 @@ class Details extends React.Component {
     return (
       <div className="routeserver-status">
         <ul>
-          <li><i className="fa fa-clock-o"></i> Last Reboot: <b>{rsStatus.last_reboot}</b></li>
-          <li><i className="fa fa-clock-o"></i> Last Reconfig: <b>{rsStatus.last_reconfig}</b></li>
-          <li><i className="fa fa-battery-full"></i> <b>{rsStatus.message}</b></li>
+          <li><i className="fa fa-clock-o"></i>
+            Last Reboot: <b><Datetime value={rsStatus.last_reboot} /></b>
+          </li>
+          <li><i className="fa fa-clock-o"></i> 
+            Last Reconfig: <b><Datetime value={rsStatus.last_reconfig} /></b>
+          </li>
+          <li><i className="fa fa-battery-full"></i> 
+            <b>{rsStatus.message}</b></li>
         </ul>
       </div>
     );

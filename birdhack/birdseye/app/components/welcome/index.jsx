@@ -11,7 +11,7 @@ export default class Welcome extends React.Component {
 
        <div className="jumbotron">
          <h1>Welcome to Birdseye!</h1>
-         <p>Your friendly neighbourhood bird app</p>
+         <p>Your friendly bird looking glass</p>
        </div>
       </div>
     )

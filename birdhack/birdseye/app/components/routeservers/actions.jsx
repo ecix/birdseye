@@ -21,6 +21,9 @@ export const LOAD_ROUTESERVER_ROUTES_REQUEST = '@birdseye/LOAD_ROUTESERVER_ROUTE
 export const LOAD_ROUTESERVER_ROUTES_SUCCESS = '@birdseye/LOAD_ROUTESERVER_ROUTES_SUCCESS';
 export const LOAD_ROUTESERVER_ROUTES_ERROR   = '@birdseye/LOAD_ROUTESERVER_ROUTES_ERROR';
 
+export const SET_PROTOCOLS_FILTER_VALUE = '@birdseye/SET_PROTOCOLS_FILTER_VALUE';
+export const SET_ROUTES_FILTER_VALUE = '@birdseye/SET_ROUTES_FILTER_VALUE';
+
 
 // Action Creators
 export function loadRouteserversRequest() {
@@ -130,6 +133,7 @@ export function loadRouteserverProtocol(routeserverId) {
     dispatch(loadRouteserverProtocolRequest(routeserverId));
     axios.get(`/birdseye/api/routeserver/${routeserverId}/protocol/`)
       .then((result) => {
+        dispatch(setProtocolsFilterValue(""));
         dispatch(loadRouteserverProtocolSuccess(routeserverId, result.data));
       });
   }
@@ -167,7 +171,27 @@ export function loadRouteserverRoutes(routeserverId, protocolId) {
         dispatch(
           loadRouteserverRoutesSuccess(routeserverId, protocolId, result.data)
         );
+        dispatch(setRoutesFilterValue(""));
       });
   }
 }
 
+
+export function setProtocolsFilterValue(value) {
+  return {
+    type: SET_PROTOCOLS_FILTER_VALUE,
+    payload: {
+      protocolsFilterValue: value
+    }
+  }
+}
+
+
+export function setRoutesFilterValue(value) {
+  return {
+    type: SET_ROUTES_FILTER_VALUE,
+    payload: {
+      routesFilterValue: value
+    }
+  }
+}

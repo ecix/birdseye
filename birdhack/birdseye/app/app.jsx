@@ -1,6 +1,9 @@
 
 /**
  * Birdseye v.1.0.0
+ * ----------------
+ *
+ * @author Matthias Hannig <mha@ecix.net>
  */
 
 import axios     from 'axios'

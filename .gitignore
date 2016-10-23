@@ -1,0 +1,12 @@
+
+*.swp
+*.swo
+
+*.sqlite*
+
+
+venv/
+
+static/
+
+

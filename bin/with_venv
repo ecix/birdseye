@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#
+# Use venv and python2.7 env
+#
+
+# Enable python2.7 SCL if present
+PY27_SCL=/opt/rh/python27/enable
+if [ -r $PY27_SCL ]; then
+  echo "[i] Python 2.7 SCL detected"
+  source $PY27_SCL
+fi
+
+NAME="billing-worker"
+
+BASEDIR=$(dirname $0)
+
+# Get absolute basedirectory
+APPDIR=`python -c "import os; print(os.path.abspath('$BASEDIR/../.'));"`
+
+# Operate from application directory
+cd $APPDIR
+
+# Load virtualenv
+source ./venv/bin/activate
+
+# == exec file 
+exec $@

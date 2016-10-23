@@ -1,0 +1,13 @@
+#!/bin/bash
+
+BASEDIR=$(dirname $0)
+APPDIR=$BASEDIR/../birdhack
+
+PORT=8001
+
+echo "[i] Loading virtualenv (venv)"
+source $APPDIR/../venv/bin/activate
+
+echo "[i] Starting Birdhack Server"
+cd $APPDIR && python manage.py runserver 0.0.0.0:$PORT
+

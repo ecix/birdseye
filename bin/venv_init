@@ -1,0 +1,40 @@
+#!/bin/bash
+
+#
+# Python virtualenv setup
+#
+
+set -e
+
+PY27_SCL=/opt/rh/python27/enable
+if [ -r $PY27_SCL ]; then
+  echo "[i] Python 2.7 SCL detected"
+  source $PY27_SCL
+fi
+
+
+echo "[i] Setting up virtualenv (venv)"
+
+BASEDIR=$(dirname $0)
+cd $BASEDIR/../
+
+if [ ! -d venv ]; then
+
+    # test which virtualenv tool to use
+    if which virtualenv2 >/dev/null; then
+    VIRTUALENV=virtualenv2
+    else
+    VIRTUALENV=virtualenv
+    fi
+
+    echo "[i] Using $VIRTUALENV"
+
+    $VIRTUALENV venv
+fi
+
+echo "[i] Loading virtualenv (venv)"
+source venv/bin/activate
+
+echo "[i] Installing requirements"
+pip install -r requirements.txt
+

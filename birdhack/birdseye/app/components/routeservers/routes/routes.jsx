@@ -9,6 +9,8 @@ import {connect} from 'react-redux'
 import {loadRouteserverRoutes} from '../actions'
 import {showBgpAttributes} from './bgp-attributes-modal-actions'
 
+import Spinner from 'react-spinkit'
+
 function _filteredRoutes(routes, filter) {
   let filtered = [];
   if(filter == "") {
@@ -41,6 +43,14 @@ class RoutesTable extends React.Component {
   }
 
   render() {
+    if(this.props.isLoading) {
+      return (
+        <div className="loading-indicator">
+          <Spinner spinnerName="circle" />
+        </div>
+      );
+    }
+
     let routes = this.props.routes[this.props.protocolId];
     if (!routes) {
       return null;
@@ -87,8 +97,9 @@ class RoutesTable extends React.Component {
 export default connect(
   (state) => {
     return {
-      filter: state.routeservers.routesFilterValue,
-      routes: state.routeservers.routes
+      isLoading: state.routeservers.routesAreLoading,
+      filter:    state.routeservers.routesFilterValue,
+      routes:    state.routeservers.routes
     }
   }
 )(RoutesTable);

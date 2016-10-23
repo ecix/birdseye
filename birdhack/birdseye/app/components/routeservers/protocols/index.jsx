@@ -10,6 +10,8 @@ import {loadRouteserverProtocol}
 
 import {Link} from 'react-router'
 
+import Spinner from 'react-spinkit'
+
 
 function _filteredProtocols(protocols, filter) {
   let filtered = [];
@@ -45,6 +47,15 @@ class ProtocolTable extends React.Component {
   }
 
   render() {
+    if(this.props.isLoading) {
+      return (
+        <div className="loading-indicator">
+          <Spinner spinnerName="circle" />
+        </div>
+      );
+    }
+
+
     let protocol = this.props.protocols[parseInt(this.props.routeserverId)];
     if(!protocol) {
       return null;
@@ -58,6 +69,7 @@ class ProtocolTable extends React.Component {
         </p>
       );
     }
+
 
     let neighbours = [];
     for (let id in protocol) {
@@ -116,6 +128,7 @@ class ProtocolTable extends React.Component {
 export default connect(
   (state) => {
     return {
+      isLoading: state.routeservers.protocolsAreLoading,
       protocols: state.routeservers.protocols,
       filter: state.routeservers.protocolsFilterValue
     }

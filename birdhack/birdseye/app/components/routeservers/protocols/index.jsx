@@ -10,6 +10,8 @@ import {loadRouteserverProtocol}
 
 import {Link} from 'react-router'
 
+import RelativeTime from 'components/relativetime'
+
 import Spinner from 'react-spinkit'
 
 
@@ -85,7 +87,9 @@ class ProtocolTable extends React.Component {
            </td>
           <td>{n.neighbor_as}</td>
           <td>{n.state}</td>
-          <td></td>
+          <td>
+            <RelativeTime value={n.state_changed} suffix={true} />
+          </td>
           <td>
             <Link to={routesLink}>
               {n.description}

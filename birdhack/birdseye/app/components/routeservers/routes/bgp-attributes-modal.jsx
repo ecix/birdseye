@@ -29,9 +29,12 @@ class BgpAttributesModal extends React.Component {
       return null;
     }
 
-    let communities = attrs.bgp.communities.map((c) => {
-      return('(' + c.join(', ') + ') ')
-     });
+    let communities = '';
+    if (attrs.bgp.communities) {
+      communities = attrs.bgp.communities.map((c) => {
+        return('(' + c.join(', ') + ') ')
+       });
+    }
 
     return (
       <Modal className="bgp-attributes-modal"

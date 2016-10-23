@@ -1,0 +1,54 @@
+
+
+/*
+.routeserver-status-list {
+  margin: 0px 40px;
+  margin-right: auto;
+
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .routeserver-status {
+    flex: 1;
+  }
+
+
+  .status-name {
+    font-weight: bold;
+  }
+}
+
+*/
+
+.routeserver-status-list {
+  .routeserver-status {
+    padding: 0px 20px;
+  }
+  .status-name {
+    font-weight: bold;
+  }
+}
+
+.routeserver-status {
+  ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    li {
+      padding: 10px;
+    }
+
+  }
+}
+
+
+.details-main {
+  margin-top: 20px;
+}
+
+
+
+

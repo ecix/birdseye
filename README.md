@@ -1,4 +1,7 @@
 
+# Birdseye - Your friendly bird looking glass
 
-Birdhack Django Wrapper Project
+
+
+
 

@@ -1,4 +1,6 @@
 
+*.pyc
+
 *.swp
 *.swo
 
@@ -9,4 +11,6 @@ venv/
 
 static/
 
+
+node_modules/
 

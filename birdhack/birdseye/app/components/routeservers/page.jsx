@@ -32,7 +32,7 @@ class RouteserversPage extends React.Component {
             <div className="card">
               <SearchInput 
                 value={this.props.protocolsFilterValue}
-                placeholder="Filter by Neightbour, ASN or Description"
+                placeholder="Filter by Neighbour, ASN or Description"
                 onChange={(e) => this.setFilter(e.target.value)}
               />
             </div>

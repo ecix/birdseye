@@ -55,11 +55,11 @@ export function loadRouteservers() {
     dispatch(loadRouteserversRequest())
 
     axios.get('/birdseye/api/routeserver/')
-      .then((result) => {
-        dispatch(loadRouteserversSuccess(result.data));
+      .then(({data}) => {
+        dispatch(loadRouteserversSuccess(data["routeservers"]));
       })
-      .catch((error) => {
-        dispatch(loadRouteserversError(error.data));
+      .catch(({data}) => {
+        dispatch(loadRouteserversError(data));
       });
   }
 }
@@ -99,11 +99,11 @@ export function loadRouteserverStatus(routeserverId) {
   return (dispatch) => {
     dispatch(loadRouteserverStatusRequest(routeserverId));
     axios.get(`/birdseye/api/routeserver/${routeserverId}/status/`)
-      .then((result) => {
-        dispatch(loadRouteserverStatusSuccess(routeserverId, result.data));
+      .then(({data}) => {
+        dispatch(loadRouteserverStatusSuccess(routeserverId, data));
       })
-      .catch((error) => {
-        dispatch(loadRouteserverStatusError(routeserverId, error.data));
+      .catch(({data}) => {
+        dispatch(loadRouteserverStatusError(routeserverId, data));
       });
   }
 }
@@ -132,9 +132,9 @@ export function loadRouteserverProtocol(routeserverId) {
   return (dispatch) => {
     dispatch(loadRouteserverProtocolRequest(routeserverId));
     axios.get(`/birdseye/api/routeserver/${routeserverId}/protocol/`)
-      .then((result) => {
+      .then(({data}) => {
         dispatch(setProtocolsFilterValue(""));
-        dispatch(loadRouteserverProtocolSuccess(routeserverId, result.data));
+        dispatch(loadRouteserverProtocolSuccess(routeserverId, data));
       });
   }
 }
@@ -167,9 +167,9 @@ export function loadRouteserverRoutes(routeserverId, protocolId) {
     dispatch(loadRouteserverRoutesRequest(routeserverId, protocolId))
 
     axios.get(`/birdseye/api/routeserver/${routeserverId}/routes/?protocol=${protocolId}`)
-      .then((result) => {
+      .then(({data}) => {
         dispatch(
-          loadRouteserverRoutesSuccess(routeserverId, protocolId, result.data)
+          loadRouteserverRoutesSuccess(routeserverId, protocolId, data)
         );
         dispatch(setRoutesFilterValue(""));
       });

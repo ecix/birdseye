@@ -100,6 +100,11 @@ class ProtocolTable extends React.Component {
               {n.routes.imported}
             </Link>
           </td>
+        <td>
+            <Link to={routesLink}>
+              {n.routes.filtered}
+            </Link>
+          </td>
         </tr>
       );
     }
@@ -115,6 +120,7 @@ class ProtocolTable extends React.Component {
               <th>Uptime</th>
               <th>Description</th>
               <th>Routes Recv.</th>
+              <th>Routes Filtered</th>
             </tr>
           </thead>
           <tbody>

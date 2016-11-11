@@ -10,8 +10,7 @@
 
 venv/
 
-static/
-
+django_backend/birdseye/static
 
 node_modules/
 

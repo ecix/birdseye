@@ -16,7 +16,6 @@ if [ -r $PY27_SCL ]; then
   source $PY27_SCL
 fi
 
-NAME="mete_server"
 
 BASEDIR=$(dirname $0)
 

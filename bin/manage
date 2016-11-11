@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BASEDIR=$(dirname $0)
-APPDIR=$BASEDIR/../birdhack
+APPDIR=$BASEDIR/../backend
 
 # Enable python 2.7 scl
 PY27_SCL=/opt/rh/python27/enable

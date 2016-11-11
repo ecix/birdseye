@@ -11,7 +11,6 @@ if [ -r $PY27_SCL ]; then
   source $PY27_SCL
 fi
 
-NAME="billing-worker"
 
 BASEDIR=$(dirname $0)
 

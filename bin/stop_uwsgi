@@ -4,7 +4,7 @@
 # uWSGI shutdown script for: csc-api-server
 #
 
-NAME="ten-server"
+NAME="birdseye-backend"
 
 BASEDIR=$(dirname $0)
 

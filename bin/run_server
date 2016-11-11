@@ -1,9 +1,16 @@
 #!/bin/bash
 
 BASEDIR=$(dirname $0)
-APPDIR=$BASEDIR/../birdhack
+APPDIR=$BASEDIR/../backend
 
 PORT=8001
+
+# Enable python 2.7 scl
+PY27_SCL=/opt/rh/python27/enable
+if [ -r $PY27_SCL ]; then
+  echo "[i] Python 2.7 SCL detected"
+  source $PY27_SCL
+fi
 
 echo "[i] Loading virtualenv (venv)"
 source $APPDIR/../venv/bin/activate

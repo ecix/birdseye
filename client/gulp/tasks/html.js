@@ -13,10 +13,10 @@ var gulp = require('gulp');
 gulp.task('html', function(){
 
   // Copy main app
-  gulp.src('app/*.html').pipe(gulp.dest('build/'));
+  gulp.src('*.html').pipe(gulp.dest('build/'));
 
   // Copy all other templates markdown
-  gulp.src('app/**/*.html')
+  gulp.src('**/*.html')
     .pipe(gulp.dest('build/'));
 
 });

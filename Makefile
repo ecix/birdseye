@@ -41,7 +41,7 @@ dist:
 	cp -r etc/* $(DIST)/etc/.
 
 	# Exclude local config files from dist
-	rm -f $(DIST)/etc/ecix/*local*
+	rm -f $(DIST)/etc/birdseye/*local*
 
 	# Create app install target
 	mkdir -p $(APP_DIST)
@@ -115,6 +115,9 @@ $(LOCAL_RPMS)/$(RPM): dist
 	# Get rpm from server
 	scp $(BUILD_SERVER):$(RPM) $(LOCAL_RPMS)/.
 
+
+clean:
+	rm -rf $(DIST)
 
 build_server:
 ifeq ($(BUILD_SERVER), '')

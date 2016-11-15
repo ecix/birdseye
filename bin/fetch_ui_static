@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#
+# Fetch prebuilt UI
+#
+
+BASEDIR=$(dirname $0)
+APPDIR=$BASEDIR/..
+
+# Operate from application base directory
+cd $APPDIR
+
+VERSION=`cat VERSION`
+
+REPO=https://raw.githubusercontent.com/ecix/birdseye-static/master/builds/
+DIST=birdseye-ui-dist-$VERSION.tar.gz
+
+BUILDS=./builds
+
+if [ ! -d "$BUILDS" ]; then
+  echo "Creating builds directory"
+  mkdir $BUILDS
+fi
+
+if [ ! -f "$BUILDS/$DIST" ]; then
+  echo "Downloading ui dist"
+  curl -o $BUILDS/$DIST $REPO$DIST
+
+  echo "Unpacking ui"
+  cd client/ && tar xvzf ../$BUILDS/$DIST
+fi
+
+

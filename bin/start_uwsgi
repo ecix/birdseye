@@ -25,6 +25,14 @@ APPDIR=`python -c "import os; print(os.path.abspath('$BASEDIR/../'));"`
 # Operate from application directory
 cd $APPDIR
 
+# Should we download a static ui build?
+if [ $(config_get autodownload_ui) == "true" ]; then
+  echo "[i] Autodownloading static ui build"
+  ./bin/fetch_ui_dist
+fi
+
+
+
 # Enable virtual env
 echo "[i] Loading virtualenv (venv)"
 source ./venv/bin/activate
@@ -76,6 +84,7 @@ exec ./venv/bin/uwsgi \
   --uid    $USER \
   --gid    $GROUP \
   --venv   ./venv/ \
+  --disable-logging \
   --module=backend.server:app \
   --static-map /static=$STATIC_ROOT \
   --threads   $NUM_THREADS \

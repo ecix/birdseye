@@ -72,6 +72,7 @@ rpm: dist
 	mkdir -p $(LOCAL_RPMS)
 
 	fpm -s dir -t rpm -n $(APP) -v $(VERSION) -C $(DIST) \
+		--architecture $(ARCH) \
 		--depends gcc \
 		--depends python-virtualenv \
 		--config-files /etc/birdseye/birdseye.conf \
@@ -107,6 +108,7 @@ $(LOCAL_RPMS)/$(RPM): dist
 
 	ssh $(BUILD_SERVER) -- \
 		fpm -s dir -t rpm -n $(APP) -v $(VERSION) -C $(REMOTE_DIST)/$(DIST) \
+			--architecture $(ARCH) \
 			--depends gcc \
 			--depends python-virtualenv \
 			--config-files /etc/birdseye/birdseye.conf \

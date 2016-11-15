@@ -83,9 +83,6 @@ rpm: dist
 	mv $(RPM) $(LOCAL_RPMS)/.
 
 
-fnord:
-	echo $(BUILD_SERVER)
-
 
 #
 # Build the rpm on the build server

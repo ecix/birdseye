@@ -13,7 +13,7 @@
 
 VERSION=$(shell cat ../VERSION)
 
-DIST_BUILDS=../../birdseye-static/builds/
+DIST_BUILDS=../../birdseye-static/builds
 DIST=birdseye-ui-dist-$(VERSION).tar.gz
 
 # == END CONFIGURATION ==
@@ -36,7 +36,7 @@ watch:
 	while true; do gulp watch; done
 
 
-$(DIST_BUILD): all
+$(DIST_BUILD): deps client
 	@echo "Creating birdseye ui distribution"
 	tar cvzf $(DIST) build/
 	mv $(DIST) $(DIST_BUILDS)
@@ -44,6 +44,7 @@ $(DIST_BUILD): all
 	@echo "Done. Don't forget to push the dist to github"
 
 
+
 dist: $(DIST_BUILD)
-	echo $@
+	echo $(DIST_BUILD)
 

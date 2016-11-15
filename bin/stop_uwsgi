@@ -9,7 +9,7 @@ NAME="birdseye-backend"
 BASEDIR=$(dirname $0)
 
 # Get absolute basedirectory
-APPDIR=`python -c "import os; print(os.path.abspath('$BASEDIR/../backend'));"`
+APPDIR=`python -c "import os; print(os.path.abspath('$BASEDIR/..'));"`
 cd $APPDIR
 
 # Helper: Get value from config file.

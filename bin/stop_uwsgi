@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# uWSGI shutdown script for: csc-api-server
+# uWSGI shutdown script for: birdseye-server
 #
 
 NAME="birdseye-backend"
@@ -14,7 +14,7 @@ cd $APPDIR
 
 # Helper: Get value from config file.
 function config_get {
-  python -c "from ten.settings import SERVER; print SERVER['$1']"
+  python -c "from backend.config.settings import SERVER; print SERVER['$1']"
 }
 
 #### BEGIN CONFIGURATION ####

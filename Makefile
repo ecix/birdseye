@@ -51,6 +51,7 @@ dist:
 		--exclude Makefile \
 		--exclude $(DIST) \
 		--exclude $(LOCAL_RPMS) \
+		--exclude builds \
 		--exclude node_modules \
 		--exclude venv \
 		--exclude *local* \

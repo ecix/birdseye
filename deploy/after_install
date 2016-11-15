@@ -1,0 +1,18 @@
+#!/bin/bash
+
+SERVICE=birdseye
+
+echo "[i] Post install $SERVICE"
+echo "[i] Creating user and updating permissions"
+useradd --system -d /opt/$SERVICE ten
+
+# Initialize venv
+cd /opt/ecix/$SERVICE && ./bin/venv_init
+
+echo "[i] Clearing bytecode cache files"
+find /opt/ecix/$SERVICE -name "*.pyc" -exec rm {} \;
+find /opt/ecix/$SERVICE -name "__pycache__" -exec rm -fr {} \;
+
+echo "[i] Restarting $SERVICE"
+/sbin/restart birdseye
+

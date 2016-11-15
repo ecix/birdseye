@@ -69,7 +69,7 @@ echo "[i] Starting uWSGI: $BIND (uid: $USER, gid: $GROUP, th: $NUM_THREADS, proc
 echo "    Stats: $BIND_STATS"
 
 # Start uwsgi
-exec ../venv/bin/uwsgi \
+exec ./venv/bin/uwsgi \
   --die-on-term \
   --http   $BIND \
   --stats  $BIND_STATS \

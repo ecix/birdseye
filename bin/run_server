@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BASEDIR=$(dirname $0)
-APPDIR=$BASEDIR/../backend
+APPDIR=$BASEDIR/..
 
 PORT=8001
 
@@ -15,6 +15,6 @@ fi
 echo "[i] Loading virtualenv (venv)"
 source $APPDIR/../venv/bin/activate
 
-echo "[i] Starting Birdhack Server"
-cd $APPDIR && python manage.py runserver 0.0.0.0:$PORT
+echo "[i] Starting Birdseye Server"
+cd $APPDIR && python backend/server.py
 

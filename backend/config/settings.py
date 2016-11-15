@@ -17,3 +17,7 @@ BIRD_SERVERS = [
     (config.get(bird, 'name'), config.get(bird, 'api'))
     for bird in config.sections() if bird.startswith('bird')
 ]
+
+# Load server configuration
+SERVER = dict(config.items('server'))
+

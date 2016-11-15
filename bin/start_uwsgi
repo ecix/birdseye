@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #
-# uWSGI startup script for: vault-server
+# uWSGI startup script for: birdseye server
 #
 
 # == Helper: Get value from config file.
 function config_get {
-  python -c "from backend.settings import SERVER; print SERVER['$1']"
+  python -c "from backend.config.settings import SERVER; print SERVER['$1']"
 }
 
 # Enable python2.7 SCL if present
@@ -39,8 +39,8 @@ STATIC_ROOT=$APPDIR/static
 #
 
 # == Load configuration
-BIND_STATS=$(config_get bind_stats)
-BIND=$(config_get bind_http)
+BIND_STATS=$(config_get listen_stats)
+BIND=$(config_get listen_http)
 
 USER=$(config_get user)
 GROUP=$(config_get group)
@@ -76,7 +76,7 @@ exec ../venv/bin/uwsgi \
   --uid    $USER \
   --gid    $GROUP \
   --venv   ../venv/ \
-  --module=backend.wsgi:application \
+  --module=backend.server:app \
   --static-map /static=$STATIC_ROOT \
   --threads   $NUM_THREADS \
   --processes $NUM_WORKERS \

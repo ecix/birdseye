@@ -11,11 +11,39 @@
 # wrong.
 #
 
+VERSION=$(shell cat ../VERSION)
 
-all:
+DIST_BUILDS=../../birdseye-static/builds/
+DIST=birdseye-ui-dist-$(VERSION).tar.gz
+
+# == END CONFIGURATION ==
+
+DIST_BUILD=$(addprefix $(DIST_BUILDS)/, $(DIST))
+
+all: deps client
+
+deps:
+	@echo "Installing dependencies"
 	npm install
+
+
+client:
+	@echo "Building birdseye UI"
 	gulp
+
 
 watch:
 	while true; do gulp watch; done
+
+
+$(DIST_BUILD): all
+	@echo "Creating birdseye ui distribution"
+	tar cvzf $(DIST) build/
+	mv $(DIST) $(DIST_BUILDS)
+	@echo ""
+	@echo "Done. Don't forget to push the dist to github"
+
+
+dist: $(DIST_BUILD)
+	echo $@
 

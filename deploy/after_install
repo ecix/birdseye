@@ -4,7 +4,7 @@ SERVICE=birdseye
 
 echo "[i] Post install $SERVICE"
 echo "[i] Creating user and updating permissions"
-useradd --system -d /opt/$SERVICE ten
+useradd --system -d /opt/ecix/$SERVICE $SERVICE
 
 # Initialize venv
 cd /opt/ecix/$SERVICE && ./bin/venv_init
@@ -13,6 +13,14 @@ echo "[i] Clearing bytecode cache files"
 find /opt/ecix/$SERVICE -name "*.pyc" -exec rm {} \;
 find /opt/ecix/$SERVICE -name "__pycache__" -exec rm -fr {} \;
 
-echo "[i] Restarting $SERVICE"
-/sbin/restart birdseye
+
+SERVICE_STATUS=$(status $SERVICE)
+if [[ $SERVICE_STATUS == *"stop"* ]] 
+then 
+        echo "[i] Remember to start the $SERVICE server!"
+        echo "# start $SERVICE"
+else
+        echo "[i] Restarting birdseye server..."
+        /sbin/restart $SERVICE
+fi
 

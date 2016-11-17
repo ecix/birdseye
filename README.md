@@ -82,7 +82,7 @@ All sources are available in `client/`.
 
 Install build tools as needed:
 
-    npm install -g gulp
+    npm install -g gulp-cli
 
 
 Create a fresh UI build with

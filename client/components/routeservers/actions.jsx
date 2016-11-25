@@ -169,7 +169,7 @@ export function loadRouteserverRoutes(routeserverId, protocolId) {
     axios.get(`/birdseye/api/routeserver/${routeserverId}/routes/?protocol=${protocolId}`)
       .then(({data}) => {
         dispatch(
-          loadRouteserverRoutesSuccess(routeserverId, protocolId, data)
+          loadRouteserverRoutesSuccess(routeserverId, protocolId, data.routes)
         );
         dispatch(setRoutesFilterValue(""));
       });

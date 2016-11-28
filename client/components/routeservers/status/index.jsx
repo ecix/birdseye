@@ -22,9 +22,10 @@ class Details extends React.Component {
     return (
       <div className="routeserver-status">
         <ul>
-          <li><i className="fa fa-clock-o"></i>
-            Last Reboot: <b><Datetime value={rsStatus.last_reboot} /></b>
-          </li>
+          {rsStatus.last_reboot && 
+            <li><i className="fa fa-clock-o"></i>
+              Last Reboot: <b><Datetime value={rsStatus.last_reboot} /></b>
+            </li>}
           <li><i className="fa fa-clock-o"></i> 
             Last Reconfig: <b><Datetime value={rsStatus.last_reconfig} /></b>
           </li>

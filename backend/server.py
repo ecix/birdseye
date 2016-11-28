@@ -30,6 +30,10 @@ def api_index():
     return 'Api endpoints'
 
 
+@app.route('/birdseye/api/ui/')
+def api_ui_configuration():
+    return jsonify(settings.UI)
+
 @app.route('/birdseye/api/routeserver/')
 def api_routeserver_index():
     """List all bird servers"""

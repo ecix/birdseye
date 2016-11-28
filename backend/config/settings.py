@@ -12,6 +12,14 @@ config.read([
 ])
 
 
+# Helper
+def _parse_flags(value):
+    """Parse (boolean) flags"""
+    if value not in ['true', 'false']:
+        return value
+    return value == 'true'
+
+
 # Load bird servers from config
 BIRD_SERVERS = [
     (config.get(bird, 'name'), config.get(bird, 'api'))
@@ -21,3 +29,5 @@ BIRD_SERVERS = [
 # Load server configuration
 SERVER = dict(config.items('server'))
 
+# Load UI configuration
+UI = {k: _parse_flags(v) for k, v in dict(config.items('ui')).items()}

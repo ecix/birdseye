@@ -30,10 +30,6 @@ def api_index():
     return 'Api endpoints'
 
 
-@app.route('/birdseye/api/ui/')
-def api_ui_configuration():
-    return jsonify(settings.UI)
-
 @app.route('/birdseye/api/routeserver/')
 def api_routeserver_index():
     """List all bird servers"""
@@ -50,7 +46,13 @@ def status(pk=None):
     """Get status"""
     bird_api = _bird_api_base(pk)
     bird = client.Bird(bird_api)
-    return jsonify(bird.status())
+    status = bird.status()
+
+    # Filter last reboot in case it is not public
+    if not settings.UI['rs_show_last_reboot']:
+        status['last_reboot'] = None
+
+    return jsonify(status)
 
 
 @app.route('/birdseye/api/routeserver/<int:pk>/symbols/')

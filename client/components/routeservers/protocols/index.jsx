@@ -90,9 +90,14 @@ class NeighboursTable extends React.Component {
       );
     });
 
-    let uptimeTitle = 'Uptime';
-    if (this.props.state == 'down') {
-      uptimeTitle = 'Downtime';
+    let uptimeTitle;
+    switch(this.props.state) {
+      case 'up':
+        uptimeTitle = 'Uptime'; break;
+      case 'down':
+        uptimeTitle = 'Downtime'; break;
+      case 'start':
+        uptimeTitle = 'Since'; break;
     }
 
     return (
@@ -199,7 +204,7 @@ class Protocols extends React.Component {
                                    routeserverId={this.props.routeserverId} />);
     }
     if (neighboursIdle.length) {
-      tables.push(<NeighboursTable key="start" state="down"
+      tables.push(<NeighboursTable key="start" state="start"
                                    neighbours={neighboursIdle}
                                    routeserverId={this.props.routeserverId} />);
     }

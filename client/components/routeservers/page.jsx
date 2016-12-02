@@ -37,9 +37,7 @@ class RouteserversPage extends React.Component {
               />
             </div>
 
-            <div className="card">
-              <Protocols protocol="bgp" routeserverId={this.props.params.routeserverId} />
-            </div>
+            <Protocols protocol="bgp" routeserverId={this.props.params.routeserverId} />
           </div>
           <div className="col-md-4">
             <div className="card">

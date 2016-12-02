@@ -58,9 +58,11 @@ class BgpAttributesModal extends React.Component {
             <tr>
               <th>MED:</th><td>{attrs.bgp.med}</td>
             </tr>
-            <tr>
-              <th>AS Path:</th><td>{attrs.bgp.as_path.join(', ')}</td>
-            </tr>
+            {attrs.bgp && attrs.bgp.as_path &&
+              <tr>
+                <th>AS Path:</th><td>{attrs.bgp.as_path.join(', ')}</td>
+              </tr>
+            }
             <tr>
               <th>Communities:</th>
               <td>{communities}</td>

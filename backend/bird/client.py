@@ -4,6 +4,7 @@ Bird api consumer
 """
 
 import requests
+from werkzeug.exceptions import abort
 
 class Bird(object):
     """Bird client"""
@@ -17,6 +18,8 @@ class Bird(object):
         """Make API request and return parsed json"""
         url = "{}{}".format(self.bird_api_base, endpoint)
         res = requests.get(url)
+        if res.status_code != 200:
+            abort(res.status_code)
         response = res.json()
         return response
 

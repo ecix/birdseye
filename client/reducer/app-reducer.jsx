@@ -12,10 +12,14 @@ import routeserversReducer
 import bgpAttributesModalReducer
   from 'components/routeservers/routes/bgp-attributes-modal-reducer'
 
+import errorsReducer
+  from 'components/errors/reducer'
+
 
 export default combineReducers({
   routeservers:       routeserversReducer,
   bgpAttributesModal: bgpAttributesModalReducer,
-  routing:            routerReducer
+  routing:            routerReducer,
+  errors:             errorsReducer
 });
 

@@ -1,10 +1,11 @@
-
-
 /**
  * Main Layout Scss File 
  */
 
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
 body, html {
+  font-family: "Source Sans Pro";
   margin: 0px;
   padding: 0px;
 }

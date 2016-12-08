@@ -5,6 +5,8 @@
 
 import axios from 'axios'
 
+import {apiError} from 'components/errors/actions'
+
 export const LOAD_ROUTESERVERS_REQUEST = '@birdseye/LOAD_ROUTESERVERS_REQUEST';
 export const LOAD_ROUTESERVERS_SUCCESS = '@birdseye/LOAD_ROUTESERVERS_SUCCESS';
 export const LOAD_ROUTESERVERS_ERROR   = '@birdseye/LOAD_ROUTESERVERS_ERROR';
@@ -58,8 +60,9 @@ export function loadRouteservers() {
       .then(({data}) => {
         dispatch(loadRouteserversSuccess(data["routeservers"]));
       })
-      .catch(({data}) => {
-        dispatch(loadRouteserversError(data));
+      .catch((error) => {
+        dispatch(apiError(error));
+        dispatch(loadRouteserversError(error.data));
       });
   }
 }
@@ -102,8 +105,9 @@ export function loadRouteserverStatus(routeserverId) {
       .then(({data}) => {
         dispatch(loadRouteserverStatusSuccess(routeserverId, data));
       })
-      .catch(({data}) => {
-        dispatch(loadRouteserverStatusError(routeserverId, data));
+      .catch((error) => {
+        dispatch(apiError(error));
+        dispatch(loadRouteserverStatusError(routeserverId, error.data));
       });
   }
 }

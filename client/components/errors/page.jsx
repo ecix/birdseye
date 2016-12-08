@@ -10,7 +10,6 @@ class ErrorsPage extends React.Component {
   }
 
   render() {
-    console.log("hubba", this.props.error);
     if (this.props.error == null) {
       return null;
     }

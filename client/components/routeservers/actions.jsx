@@ -139,7 +139,8 @@ export function loadRouteserverProtocol(routeserverId) {
       .then(({data}) => {
         dispatch(setProtocolsFilterValue(""));
         dispatch(loadRouteserverProtocolSuccess(routeserverId, data));
-      });
+      })
+      .catch(error => dispatch(apiError(error)));
   }
 }
 
@@ -176,7 +177,8 @@ export function loadRouteserverRoutes(routeserverId, protocolId) {
           loadRouteserverRoutesSuccess(routeserverId, protocolId, data.routes)
         );
         dispatch(setRoutesFilterValue(""));
-      });
+      })
+      .catch(error => dispatch(apiError(error)));
   }
 }
 

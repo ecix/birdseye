@@ -22,6 +22,8 @@ export const LOAD_ROUTESERVER_PROTOCOL_ERROR   = '@birdseye/LOAD_ROUTESERVER_PRO
 export const LOAD_ROUTESERVER_ROUTES_REQUEST = '@birdseye/LOAD_ROUTESERVER_ROUTES_REQUEST';
 export const LOAD_ROUTESERVER_ROUTES_SUCCESS = '@birdseye/LOAD_ROUTESERVER_ROUTES_SUCCESS';
 export const LOAD_ROUTESERVER_ROUTES_ERROR   = '@birdseye/LOAD_ROUTESERVER_ROUTES_ERROR';
+export const LOAD_ROUTESERVER_ROUTES_FILTERED_REQUEST = '@birdseye/LOAD_ROUTESERVER_ROUTES_FILTERED_REQUEST';
+export const LOAD_ROUTESERVER_ROUTES_FILTERED_SUCCESS = '@birdseye/LOAD_ROUTESERVER_ROUTES_FILTERED_SUCCESS';
 
 export const SET_PROTOCOLS_FILTER_VALUE = '@birdseye/SET_PROTOCOLS_FILTER_VALUE';
 export const SET_ROUTES_FILTER_VALUE = '@birdseye/SET_ROUTES_FILTER_VALUE';
@@ -175,6 +177,44 @@ export function loadRouteserverRoutes(routeserverId, protocolId) {
       .then(({data}) => {
         dispatch(
           loadRouteserverRoutesSuccess(routeserverId, protocolId, data.routes)
+        );
+        dispatch(setRoutesFilterValue(""));
+      })
+      .catch(error => dispatch(apiError(error)));
+  }
+}
+
+
+export function loadRouteserverRoutesFilteredRequest(routeserverId, protocolId) {
+  return {
+    type: LOAD_ROUTESERVER_ROUTES_FILTERED_REQUEST,
+    payload: {
+      routeserverId: routeserverId,
+      protocolId: protocolId,
+    }
+  }
+}
+
+export function loadRouteserverRoutesFilteredSuccess(routeserverId, protocolId, routes) {
+  return {
+    type: LOAD_ROUTESERVER_ROUTES_FILTERED_SUCCESS,
+    payload: {
+      routeserverId: routeserverId,
+      protocolId: protocolId,
+      routes: routes
+    }
+  }
+}
+
+
+export function loadRouteserverRoutesFiltered(routeserverId, protocolId) {
+  return (dispatch) => {
+    dispatch(loadRouteserverRoutesFilteredRequest(routeserverId, protocolId))
+
+    axios.get(`/birdseye/api/routeserver/${routeserverId}/routes/filtered/?protocol=${protocolId}`)
+      .then(({data}) => {
+        dispatch(
+          loadRouteserverRoutesFilteredSuccess(routeserverId, protocolId, data.routes)
         );
         dispatch(setRoutesFilterValue(""));
       })

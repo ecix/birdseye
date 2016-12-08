@@ -10,7 +10,8 @@ class ErrorsPage extends React.Component {
   }
 
   render() {
-    if (!this.props.error || this.props.error.response.status < 500) {
+    if (!this.props.error ||
+        (this.props.error.response && this.props.error.response.status < 500)) {
       return null;
     }
     return(

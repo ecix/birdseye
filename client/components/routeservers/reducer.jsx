@@ -11,12 +11,16 @@ import {LOAD_ROUTESERVERS_REQUEST,
         LOAD_ROUTESERVER_ROUTES_REQUEST,
         LOAD_ROUTESERVER_ROUTES_SUCCESS,
 
+        LOAD_ROUTESERVER_ROUTES_FILTERED_REQUEST,
+        LOAD_ROUTESERVER_ROUTES_FILTERED_SUCCESS,
+
         SET_PROTOCOLS_FILTER_VALUE,
         SET_ROUTES_FILTER_VALUE}
   from './actions'
 
 const initialState = {
   all: [],
+  filtered: {},
   details: {},
   protocols: {},
   routes: {},
@@ -45,6 +49,7 @@ export default function reducer(state = initialState, action) {
       });
 
     case LOAD_ROUTESERVER_ROUTES_REQUEST:
+    case LOAD_ROUTESERVER_ROUTES_FILTERED_REQUEST:
       return Object.assign({}, state, {
         routesAreLoading: true
       });
@@ -71,6 +76,16 @@ export default function reducer(state = initialState, action) {
         routes: routes,
         routesAreLoading: false
       });
+
+    case LOAD_ROUTESERVER_ROUTES_FILTERED_SUCCESS:
+      var filtered = Object.assign({}, state.filtered, {
+        [action.payload.protocolId]: action.payload.routes
+      });
+      return Object.assign({}, state, {
+        filtered: filtered,
+        routesAreLoading: false
+      });
+
 
 
     case LOAD_ROUTESERVER_STATUS_SUCCESS:

@@ -38,18 +38,10 @@ class RoutesTable extends React.Component {
 
   render() {
     let routes = this.props.routes;
-    if (!routes) {
-      return null;
-    }
 
     routes = _filteredRoutes(routes, this.props.filter);
-
-    if(!routes || routes.length == 0) {
-      return(
-        <p className="help-block">
-          No routes matched your filter.
-        </p>
-      );
+    if (!routes || !routes.length) {
+      return null;
     }
 
     let routesView = routes.map((r) =>
@@ -83,7 +75,7 @@ class RoutesTable extends React.Component {
 }
 
 
-connect(
+RoutesTable = connect(
   (state) => {
     return {
       filter:    state.routeservers.routesFilterValue,
@@ -115,9 +107,14 @@ class RoutesTables extends React.Component {
     const routes = this.props.routes[this.props.protocolId];
     const filtered = this.props.filtered[this.props.protocolId] || [];
 
-    if(!routes) {
-      return null;
+    if(!routes || routes.length == 0) {
+      return(
+        <p className="help-block">
+          No routes matched your filter.
+        </p>
+      );
     }
+
 
     const received = routes.filter(r => filtered.indexOf(r) < 0);
 
@@ -133,8 +130,8 @@ class RoutesTables extends React.Component {
 
     return (
       <div>
-        <RouteTable header={filtdHeader} routes={filtered}/>
-        <RouteTable header={recvdHeader} routes={received}/>
+        <RoutesTable header={filtdHeader} routes={filtered}/>
+        <RoutesTable header={recvdHeader} routes={received}/>
       </div>
     );
 

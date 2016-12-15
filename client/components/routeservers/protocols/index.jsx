@@ -62,7 +62,7 @@ class NeighboursTable extends React.Component {
            </td>
           <td>{n.neighbor_as}</td>
           <td>{n.state}</td>
-          <td>
+          <td className="date-since">
             <RelativeTime value={n.state_changed} suffix={true} />
           </td>
           <td>
@@ -102,7 +102,7 @@ class NeighboursTable extends React.Component {
 
     return (
       <div className="card">
-        <table className="table table-striped">
+        <table className="table table-striped table-protocols">
           <thead>
             <tr>
               <th>Neighbour</th>

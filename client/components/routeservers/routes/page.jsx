@@ -43,14 +43,11 @@ class RoutesPage extends React.Component {
               <SearchInput 
                 value={this.props.routesFilterValue}
                 placeholder="Filter by Network, Gateway or Interface"
-                onChange={(e) => this.setFilter(e.target.value)}
-              />
+                onChange={(e) => this.setFilter(e.target.value)}  />
             </div>
 
-            <div className="card">
-              <Routes routeserverId={this.props.params.routeserverId}
-                      protocolId={this.props.params.protocolId} />
-            </div>
+            <Routes routeserverId={this.props.params.routeserverId}
+                    protocolId={this.props.params.protocolId} />
           </div>
           <div className="col-md-4">
             <div className="card">

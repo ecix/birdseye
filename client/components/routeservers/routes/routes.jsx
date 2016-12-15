@@ -54,7 +54,7 @@ class RoutesTable extends React.Component {
     );
 
     return (
-      <div>
+      <div className="card">
         {this.props.header}
         <table className="table table-striped table-routes">
           <thead>

@@ -80,12 +80,24 @@ def protocol(pk=None, protocol="bgp"):
     return jsonify(bird.protocols(protocol))
 
 
+@app.route('/birdseye/api/routeserver/<int:pk>/routes/filtered/')
+def routes_filtered(pk=None):
+    """Get filtered routes for routeserver id with protocol"""
+    protocol_id = request.args.get('protocol', None)
+    if not protocol_id:
+        return jsonify({'details': 'no protocol given'}), 404
+
+    bird_api = _bird_api_base(pk)
+    bird = client.Bird(bird_api)
+    return jsonify({"routes": bird.routes_filtered(protocol_id)})
+
+
 @app.route('/birdseye/api/routeserver/<int:pk>/routes/')
 def routes(pk=None):
     """Get routes for routeserver id with protocol"""
     protocol_id = request.args.get('protocol', None)
     if not protocol_id:
-        return 404, jsonify({ 'details': 'no protocol given' })
+        return jsonify({ 'details': 'no protocol given' }), 404
 
     bird_api = _bird_api_base(pk)
     bird = client.Bird(bird_api)

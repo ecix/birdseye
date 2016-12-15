@@ -56,6 +56,14 @@ class Bird(object):
         return result.get('routes')
 
 
+    def routes_filtered(self, protocol):
+        """Get routes for neighbour"""
+        endpoint = '/routes/filtered/{}'.format(protocol)
+        result = self._api_get(endpoint)
+
+        return result.get('routes')
+
+
     def tables(self):
         """Get tables"""
 

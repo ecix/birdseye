@@ -10,14 +10,31 @@ class ErrorsPage extends React.Component {
   }
 
   render() {
-    if (!this.props.error || this.props.error.response.status < 500) {
+    if (!this.props.error) {
       return null;
     }
-    return(
-      <div className="error-notify">
-        <div className="error-icon">
-          <i className="fa fa-times-circle" aria-hidden="true"></i>
+
+    let status = null;
+
+    if (this.props.error.response) {
+      status = this.props.error.response.status;
+    }
+
+    if (!status || (status != 429 && status < 500)) {
+      return null;
+    }
+
+    let body = null;
+
+    if (status == 429) {
+      body = (
+        <div className="error-message">
+          <p>Birdseye reached the request limit.</p>
+          <p>We suggest you try at a less busy time.</p>
         </div>
+      );
+    } else {
+      body = (
         <div className="error-message">
           <p>
             Birdseye has trouble connecting to the API
@@ -27,6 +44,15 @@ class ErrorsPage extends React.Component {
           </p>
           <p>If this problem persist, we suggest you try again later.</p>
         </div>
+      );
+    }
+
+    return (
+      <div className="error-notify">
+        <div className="error-icon">
+          <i className="fa fa-times-circle" aria-hidden="true"></i>
+        </div>
+        {message}
       </div>
     );
   }

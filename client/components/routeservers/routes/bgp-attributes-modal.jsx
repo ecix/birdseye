@@ -1,4 +1,3 @@
-
 /**
  * Show BGP attributes as a modal dialog
  *
@@ -16,7 +15,6 @@ import {hideBgpAttributesModal}
 
 
 class BgpAttributesModal extends React.Component {
-
   closeModal() {
     this.props.dispatch(
       hideBgpAttributesModal()

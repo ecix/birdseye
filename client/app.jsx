@@ -56,12 +56,21 @@ const browserHistory = useRouterHistory(createHistory)({
 });
 
 // Setup application
-const loggerMiddleware = createLogger();
+let store;
 const routerMiddleware = createRouterMiddleware(browserHistory);
-const store = createStore(combinedReducer, applyMiddleware(
-  routerMiddleware,
-  thunkMiddleware, loggerMiddleware
-));
+if (window.NO_LOG) {
+  store = createStore(combinedReducer, applyMiddleware(
+    routerMiddleware,
+    thunkMiddleware
+  ));
+} else {
+  const loggerMiddleware = createLogger();
+  store = createStore(combinedReducer, applyMiddleware(
+    routerMiddleware,
+    thunkMiddleware,
+    loggerMiddleware
+  ));
+}
 
 const history = syncHistoryWithStore(browserHistory, store);
 

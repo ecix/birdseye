@@ -26,17 +26,18 @@ deps:
 	@echo "Installing dependencies"
 	npm install
 
-
 client:
 	@echo "Building birdseye UI"
 	gulp
 
+client_prod:
+	@echo "Building birdseye UI (production)"
+	DISABLE_LOGGING=1 gulp
 
 watch:
 	while true; do gulp watch; done
 
-
-$(DIST_BUILD): deps client
+$(DIST_BUILD): deps client_prod
 	@echo "Creating birdseye ui distribution"
 	tar cvzf $(DIST) build/
 	mv $(DIST) $(DIST_BUILDS)
@@ -47,4 +48,3 @@ $(DIST_BUILD): deps client
 
 dist: $(DIST_BUILD)
 	echo $(DIST_BUILD)
-

@@ -2,7 +2,7 @@
 Birdseye configuration
 """
 
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 
 config = ConfigParser()
 config.read([

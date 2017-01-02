@@ -52,7 +52,7 @@ class ErrorsPage extends React.Component {
         <div className="error-icon">
           <i className="fa fa-times-circle" aria-hidden="true"></i>
         </div>
-        {message}
+        {body}
       </div>
     );
   }

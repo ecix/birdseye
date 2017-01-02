@@ -18,8 +18,14 @@ var source     = require('vinyl-source-stream');
 
 // == Register task: app 
 gulp.task('app', function(){
+  var entries = ['./app.jsx'];
+
+  if (process.env.DISABLE_LOGGING) {
+    entries.unshift('./no_log.jsx');
+  }
+
   var bundler = browserify({
-    entries: './app.jsx',
+    entries: entries,
     extensions: ['.jsx'],
     paths: ['./node_modules', './']
   });

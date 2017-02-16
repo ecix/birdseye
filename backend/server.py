@@ -89,7 +89,7 @@ def routes_filtered(pk=None):
 
     bird_api = _bird_api_base(pk)
     bird = client.Bird(bird_api)
-    return jsonify({"routes": bird.routes_filtered(protocol_id)})
+    return jsonify(bird.routes_filtered(protocol_id))
 
 
 @app.route('/birdseye/api/routeserver/<int:pk>/routes/')
@@ -101,7 +101,7 @@ def routes(pk=None):
 
     bird_api = _bird_api_base(pk)
     bird = client.Bird(bird_api)
-    return jsonify({"routes": bird.routes(protocol_id)})
+    return jsonify(bird.routes(protocol_id))
 
 
 @app.route('/api/routeserver/<int:pk>/')

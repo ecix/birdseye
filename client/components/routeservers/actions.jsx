@@ -140,7 +140,7 @@ export function loadRouteserverProtocol(routeserverId) {
     axios.get(`/birdseye/api/routeserver/${routeserverId}/protocol/`)
       .then(({data}) => {
         dispatch(setProtocolsFilterValue(""));
-        dispatch(loadRouteserverProtocolSuccess(routeserverId, data));
+        dispatch(loadRouteserverProtocolSuccess(routeserverId, data.protocols));
       })
       .catch(error => dispatch(apiError(error)));
   }

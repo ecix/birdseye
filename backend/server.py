@@ -109,6 +109,11 @@ def api_routeserver_show(pk):
     return 'Routeserver {}'.format(pk)
 
 
+@app.route('/api/rejection-reasons/')
+def rejection_reasons():
+    return jsonify(settings.REJECT_REASONS)
+
+
 #
 # Single Page React App
 #

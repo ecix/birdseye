@@ -104,14 +104,11 @@ def routes(pk=None):
     return jsonify(bird.routes(protocol_id))
 
 
-@app.route('/api/routeserver/<int:pk>/')
-def api_routeserver_show(pk):
-    return 'Routeserver {}'.format(pk)
-
-
-@app.route('/api/rejection-reasons/')
+@app.route('/birdseye/api/rejection-reasons/')
 def rejection_reasons():
-    return jsonify(settings.REJECT_REASONS)
+    res = dict(settings.REJECTION)
+    res.update({"reasons": settings.REJECT_REASONS})
+    return jsonify(res)
 
 
 #

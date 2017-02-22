@@ -32,4 +32,5 @@ SERVER = dict(config.items('server'))
 # Load UI configuration
 UI = {k: _parse_flags(v) for k, v in dict(config.items('ui')).items()}
 
-REJECT_REASONS = dict(config.items('reject_reasons'))
+REJECTION = dict(config.items('rejection'))
+REJECT_REASONS = dict(config.items('rejection_reasons'))

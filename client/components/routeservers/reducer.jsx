@@ -15,7 +15,10 @@ import {LOAD_ROUTESERVERS_REQUEST,
         LOAD_ROUTESERVER_ROUTES_FILTERED_SUCCESS,
 
         SET_PROTOCOLS_FILTER_VALUE,
-        SET_ROUTES_FILTER_VALUE}
+        SET_ROUTES_FILTER_VALUE,
+
+        LOAD_REJECT_REASONS_REQUEST,
+        LOAD_REJECT_REASONS_SUCCESS}
   from './actions'
 
 const initialState = {
@@ -24,6 +27,10 @@ const initialState = {
   details: {},
   protocols: {},
   routes: {},
+
+  reject_reasons: {},
+  reject_id: 0,
+  asn: 0,
 
   protocolsFilterValue: "",
   routesFilterValue: "",
@@ -86,7 +93,8 @@ export default function reducer(state = initialState, action) {
         routesAreLoading: false
       });
 
-
+    case LOAD_REJECT_REASONS_SUCCESS:
+      return Object.assign({}, state, action.payload);
 
     case LOAD_ROUTESERVER_STATUS_SUCCESS:
       var details = Object.assign({}, state.details, {

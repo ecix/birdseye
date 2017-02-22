@@ -34,6 +34,13 @@ class BgpAttributesModal extends React.Component {
        });
     }
 
+    let large_communities = '';
+    if (attrs.bgp.large_communities) {
+      large_communities = attrs.bgp.large_communities.map((c) => {
+        return('(' + c.join(', ') + ') ')
+       });
+    }
+
     return (
       <Modal className="bgp-attributes-modal"
              show={this.props.show}
@@ -64,6 +71,10 @@ class BgpAttributesModal extends React.Component {
             <tr>
               <th>Communities:</th>
               <td>{communities}</td>
+            </tr>
+            <tr>
+              <th>Large Communities:</th>
+              <td>{large_communities}</td>
             </tr>
            </tbody>
           </table>

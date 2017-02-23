@@ -13,7 +13,6 @@ class Bird(object):
         """Initialize bird api consumer"""
         self.bird_api_base = bird_api_base
 
-
     def _api_get(self, endpoint):
         """Make API request and return parsed json"""
         url = "{}{}".format(self.bird_api_base, endpoint)
@@ -26,47 +25,24 @@ class Bird(object):
     def status(self):
         """Get bird API status"""
         # Make API request
-        endpoint = '/status'
-        result = self._api_get(endpoint)
-
-        return result.get('status')
-
+        return self._api_get("/status")
 
     def protocols(self, protocol="bgp"):
         """Get bird API protocols"""
-        endpoint = '/protocols/{}'.format(protocol)
-        result = self._api_get(endpoint)
-
-        return result.get('protocols')
-
+        return self._api_get("/protocols/{}".format(protocol))
 
     def symbols(self):
         """Get bird symbols"""
-        endpoint = '/symbols'
-        result = self._api_get(endpoint)
-
-        return result.get('symbols')
-
+        return self._api_get("/symbols")
 
     def routes(self, protocol):
         """Get routes for neighbour"""
-        endpoint = '/routes/protocol/{}'.format(protocol)
-        result = self._api_get(endpoint)
-
-        return result.get('routes')
-
+        return self._api_get("/routes/protocol/{}".format(protocol))
 
     def routes_filtered(self, protocol):
         """Get routes for neighbour"""
-        endpoint = '/routes/filtered/{}'.format(protocol)
-        result = self._api_get(endpoint)
-
-        return result.get('routes')
-
+        return self._api_get("/routes/filtered/{}".format(protocol))
 
     def tables(self):
         """Get tables"""
-
-        endpoint = "/symbols/tables"
-        endpoint = self._api_get(endpoint)
-        return endpoint.get('tables')
+        return self._api_get("/symbols/tables")

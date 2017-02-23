@@ -1,15 +1,45 @@
-
-
 import _ from 'underscore'
 
 import React from 'react'
 import {connect} from 'react-redux'
 
 
-import {loadRouteserverRoutes, loadRouteserverRoutesFiltered} from '../actions'
+import {loadRouteserverRoutes, loadRouteserverRoutesFiltered, loadRejectReasons} from '../actions'
 import {showBgpAttributes} from './bgp-attributes-modal-actions'
 
 import Spinner from 'react-spinkit'
+
+
+class FilterReason extends React.Component {
+  render() {
+    const route = this.props.route;
+
+    if (!this.props.reject_reasons || !route || !route.bgp ||
+        !route.bgp.large_communities) {
+        return null;
+    }
+
+    const reason = route.bgp.large_communities.filter(elem =>
+      elem[0] == this.props.asn && elem[1] == this.props.reject_id
+    );
+    if (!reason.length) {
+      return null;
+    }
+
+    return <p className="reject-reason">{this.props.reject_reasons[reason[0][2]]}</p>;
+  }
+}
+
+FilterReason = connect(
+  state => {
+    return {
+      reject_reasons: state.routeservers.reject_reasons,
+      asn:            state.routeservers.asn,
+      reject_id:      state.routeservers.reject_id,
+    }
+  }
+)(FilterReason);
+
 
 function _filteredRoutes(routes, filter) {
   let filtered = [];
@@ -30,6 +60,12 @@ function _filteredRoutes(routes, filter) {
 }
 
 class RoutesTable extends React.Component {
+  componentDidMount() {
+    if (!this.props.reject_reasons.length) {
+      this.props.dispatch(loadRejectReasons());
+    }
+  }
+
   showAttributesModal(route) {
     this.props.dispatch(
       showBgpAttributes(route)
@@ -44,14 +80,16 @@ class RoutesTable extends React.Component {
       return null;
     }
 
-    let routesView = routes.map((r) =>
-      <tr key={r.network} onClick={() => this.showAttributesModal(r)}>
-        <td>{r.network}</td>
-        <td>{r.gateway}</td>
-        <td>{r.interface}</td>
-        <td>{r.metric}</td>
-      </tr>
-    );
+    let routesView = routes.map((r) => {
+      return (
+        <tr key={r.network} onClick={() => this.showAttributesModal(r)}>
+          <td>{r.network}<FilterReason route={r}/></td>
+          <td>{r.gateway}</td>
+          <td>{r.interface}</td>
+          <td>{r.metric}</td>
+        </tr>
+      );
+    });
 
     return (
       <div className="card">
@@ -78,7 +116,8 @@ class RoutesTable extends React.Component {
 RoutesTable = connect(
   (state) => {
     return {
-      filter:    state.routeservers.routesFilterValue,
+      filter:         state.routeservers.routesFilterValue,
+      reject_reasons: state.routeservers.reject_reasons,
     }
   }
 )(RoutesTable);

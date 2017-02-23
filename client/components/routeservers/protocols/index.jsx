@@ -187,7 +187,7 @@ class Protocols extends React.Component {
           break;
         default:
           neighboursUp.push(n);
-          console.error("Could classify neighbour by state:", n);
+          console.error("Couldn't classify neighbour by state:", n);
       }
     }
 

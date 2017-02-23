@@ -25,7 +25,12 @@ Clone the repository and initialize the virtualenv:
 
     ./bin/venv_init
 
-(make sure you clone & run the program in a place to which user nobody has access)
+Make sure you run the program in a place
+to which user _nobody_ has at least read only access.
+
+The **user** and **group** can be configured in the **[server]**
+section of your config file.
+
 
 A startup script for `upstart` is available
 under `etc/init/birdseye.conf`.
@@ -76,6 +81,21 @@ If you want to build the package on a remote machine, just use
 which will copy the dist to the remote server and executes fpm via ssh.
 
 
+## Upgrading
+
+If you installed birdseye by cloning the repository,
+the server will fetch on startup a prebuilt version
+of the client UI.
+
+To upgrade to the latest version just do a
+
+		git pull
+
+and restart birdseye.
+
+You may have to clear the cache in the browser afterwards.
+
+
 ## Hacking
 
 The client is a Single Page React Application.
@@ -95,5 +115,6 @@ This will install all dependencies and run `gulp`.
 
 While working on the UI you might want to use `make watch`,
 which will keep the `gulp watch` task up and running.
+
 
 

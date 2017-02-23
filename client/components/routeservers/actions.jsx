@@ -108,7 +108,7 @@ export function loadRouteserverStatus(routeserverId) {
     dispatch(loadRouteserverStatusRequest(routeserverId));
     axios.get(`/birdseye/api/routeserver/${routeserverId}/status/`)
       .then(({data}) => {
-        dispatch(loadRouteserverStatusSuccess(routeserverId, data));
+        dispatch(loadRouteserverStatusSuccess(routeserverId, data.status));
       })
       .catch((error) => {
         dispatch(apiError(error));

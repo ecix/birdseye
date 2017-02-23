@@ -25,6 +25,7 @@ Clone the repository and initialize the virtualenv:
 
     ./bin/venv_init
 
+(make sure you clone & run the program in a place to which user nobody has access)
 
 A startup script for `upstart` is available
 under `etc/init/birdseye.conf`.

@@ -164,7 +164,7 @@ class RoutesTables extends React.Component {
     );
 
     const filtdHeader = mkHeader("orange", "filtered");
-    const recvdHeader = mkHeader("green", "received");
+    const recvdHeader = mkHeader("green", "accepted");
 
 
     return (

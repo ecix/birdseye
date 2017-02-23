@@ -20,7 +20,8 @@ class Details extends React.Component {
     return (
       <div className="routeserver-status-list">
         <div className="routeserver-status">
-          <span className="status-name">{rs.name}</span> ({rsStatus.router_id})
+          <span className="status-name">{rs.name}</span>
+            {rsStatus.router_id && ` (${rsStatus.router_id})`}
         </div>
       </div>
     );

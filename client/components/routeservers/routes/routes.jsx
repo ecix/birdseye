@@ -11,10 +11,6 @@ import Spinner from 'react-spinkit'
 
 
 class FilterReason extends React.Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return !this.props.reject_reasons;
-  }
-
   render() {
     const route = this.props.route;
 

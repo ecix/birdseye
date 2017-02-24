@@ -66,11 +66,11 @@ class BgpAttributesModal extends React.Component {
             }
             <tr>
               <th>Communities:</th>
-              <td>{communities}</td>
+              <td>{communities.join(' ')}</td>
             </tr>
             <tr>
               <th>Large Communities:</th>
-              <td>{large_communities}</td>
+              <td>{large_communities.join(' ')}</td>
             </tr>
            </tbody>
           </table>

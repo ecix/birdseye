@@ -65,7 +65,7 @@ class BgpAttributesModal extends React.Component {
             </tr>
             {attrs.bgp && attrs.bgp.as_path &&
               <tr>
-                <th>AS Path:</th><td>{attrs.bgp.as_path.join(', ')}</td>
+                <th>AS Path:</th><td>{attrs.bgp.as_path.join(' ')}</td>
               </tr>
             }
             <tr>

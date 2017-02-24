@@ -29,16 +29,12 @@ class BgpAttributesModal extends React.Component {
 
     let communities = '';
     if (attrs.bgp.communities) {
-      communities = attrs.bgp.communities.map((c) => {
-        return('(' + c.join(', ') + ') ')
-       });
+      communities = attrs.bgp.communities.map((c) => c.join(':'));
     }
 
     let large_communities = '';
     if (attrs.bgp.large_communities) {
-      large_communities = attrs.bgp.large_communities.map((c) => {
-        return('(' + c.join(', ') + ') ')
-       });
+      large_communities = attrs.bgp.large_communities.map((c) => c.join(':'));
     }
 
     return (

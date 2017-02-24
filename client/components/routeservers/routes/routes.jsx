@@ -11,6 +11,10 @@ import Spinner from 'react-spinkit'
 
 
 class FilterReason extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return !this.props.reject_reasons;
+  }
+
   render() {
     const route = this.props.route;
 
@@ -61,7 +65,7 @@ function _filteredRoutes(routes, filter) {
 
 class RoutesTable extends React.Component {
   componentDidMount() {
-    if (!this.props.reject_reasons.length) {
+    if (!this.props.reject_reasons.length && this.props.display_filter) {
       this.props.dispatch(loadRejectReasons());
     }
   }
@@ -83,7 +87,7 @@ class RoutesTable extends React.Component {
     let routesView = routes.map((r) => {
       return (
         <tr key={r.network} onClick={() => this.showAttributesModal(r)}>
-          <td>{r.network}<FilterReason route={r}/></td>
+          <td>{r.network}{this.props.display_filter && <FilterReason route={r}/>}</td>
           <td>{r.gateway}</td>
           <td>{r.interface}</td>
           <td>{r.metric}</td>
@@ -169,8 +173,8 @@ class RoutesTables extends React.Component {
 
     return (
       <div>
-        <RoutesTable header={filtdHeader} routes={filtered}/>
-        <RoutesTable header={recvdHeader} routes={received}/>
+        <RoutesTable header={filtdHeader} routes={filtered} display_filter={true}/>
+        <RoutesTable header={recvdHeader} routes={received} display_filter={false}/>
       </div>
     );
 

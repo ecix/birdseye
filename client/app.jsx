@@ -11,10 +11,10 @@ import axios     from 'axios'
 import React     from 'react'
 import ReactDOM  from 'react-dom'
 
-import { Component } from 'react'
+import { Component } from 'react'
 
 // Config
-import { configureAxios } from './config'
+import { configureAxios } from './config'
 
 // Redux
 import { createStore, applyMiddleware } from 'redux'
@@ -33,6 +33,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 
 // Components
 import LayoutMain from 'layouts/main'
+
 
 import WelcomePage
   from 'components/welcome'
@@ -84,7 +85,7 @@ class Birdseye extends Component {
       <Provider store={store}>
         <Router history={history}>
           <Route path="/" component={LayoutMain}>
-            <IndexRoute component={WelcomePage} />
+            <IndexRoute component={WelcomePage}/>
             <Route path="/routeservers">
               <Route path=":routeserverId" component={RouteserverPage} />
               <Route path=":routeserverId/protocols/:protocolId/routes" component={RoutesPage} />

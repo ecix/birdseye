@@ -34,3 +34,9 @@ UI = {k: _parse_flags(v) for k, v in dict(config.items('ui')).items()}
 
 REJECTION = dict(config.items('rejection'))
 REJECT_REASONS = dict(config.items('rejection_reasons'))
+ROUTES_COLUMNS = dict(config.items('routes_columns'))
+FRONTEND_CONFIG = {
+    "routes_columns": ROUTES_COLUMNS,
+    "reject_reasons": REJECT_REASONS,
+    "rejection": REJECTION,
+}

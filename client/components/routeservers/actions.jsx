@@ -245,29 +245,9 @@ export function setRoutesFilterValue(value) {
   }
 }
 
-function loadRejectReasonsRequest() {
-  return {
-    type: LOAD_REJECT_REASONS_REQUEST,
-  };
-}
-
-function loadRejectReasonsSuccess(asn, reject_id, reject_reasons) {
+export function loadRejectReasonsSuccess(asn, reject_id, reject_reasons) {
   return {
     type: LOAD_REJECT_REASONS_SUCCESS,
     payload: {asn, reject_id, reject_reasons}
   };
-}
-
-export function loadRejectReasons() {
-  return (dispatch) => {
-    dispatch(loadRejectReasonsRequest())
-
-    axios.get(`/birdseye/api/rejection-reasons/`)
-      .then(({data}) => {
-        dispatch(
-          loadRejectReasonsSuccess(data.asn, data.reject_id, data.reasons)
-        );
-      })
-      .catch(error => dispatch(apiError(error)));
-  }
 }

@@ -4,7 +4,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 
-import {loadRouteserverRoutes, loadRouteserverRoutesFiltered, loadRejectReasons} from '../actions'
+import {loadRouteserverRoutes, loadRouteserverRoutesFiltered} from '../actions'
 import {showBgpAttributes} from './bgp-attributes-modal-actions'
 
 import Spinner from 'react-spinkit'
@@ -60,33 +60,36 @@ function _filteredRoutes(routes, filter) {
 }
 
 class RoutesTable extends React.Component {
-  componentDidMount() {
-    if (!this.props.reject_reasons.length && this.props.display_filter) {
-      this.props.dispatch(loadRejectReasons());
-    }
-  }
-
   showAttributesModal(route) {
     this.props.dispatch(
       showBgpAttributes(route)
     );
   }
 
+
   render() {
     let routes = this.props.routes;
+    const routes_columns = this.props.routes_columns;
 
     routes = _filteredRoutes(routes, this.props.filter);
     if (!routes || !routes.length) {
       return null;
     }
 
+    const _lookup = (r, path) => {
+      const split = path.split(".").reduce((acc, elem) => acc[elem], r);
+
+      if (Array.isArray(split)) {
+        return split.join(" ");
+      }
+      return split;
+    }
+
     let routesView = routes.map((r) => {
       return (
         <tr key={r.network} onClick={() => this.showAttributesModal(r)}>
           <td>{r.network}{this.props.display_filter && <FilterReason route={r}/>}</td>
-          <td>{r.gateway}</td>
-          <td>{r.interface}</td>
-          <td>{r.metric}</td>
+          {Object.keys(routes_columns).map(col => <td>{_lookup(r, col)}</td>)}
         </tr>
       );
     });
@@ -98,9 +101,7 @@ class RoutesTable extends React.Component {
           <thead>
             <tr>
               <th>Network</th>
-              <th>Gateway</th>
-              <th>Interface</th>
-              <th>Metric</th>
+              {Object.values(routes_columns).map(col => <th>{col}</th>)}
             </tr>
           </thead>
           <tbody>
@@ -118,6 +119,7 @@ RoutesTable = connect(
     return {
       filter:         state.routeservers.routesFilterValue,
       reject_reasons: state.routeservers.reject_reasons,
+      routes_columns: state.config.routes_columns,
     }
   }
 )(RoutesTable);

@@ -1,8 +1,8 @@
-
 import React   from 'react'
 import Sidebar from 'components/sidebar'
 
 import ErrorsPage from 'components/errors/page'
+import Config from 'components/config/view'
 
 export default class LayoutMain extends React.Component {
   render() {
@@ -15,6 +15,7 @@ export default class LayoutMain extends React.Component {
             {this.props.children}
           </main>
         </div>
+        <Config/>
       </div>
     );
   }

@@ -54,6 +54,7 @@ dist:
 		--exclude builds \
 		--exclude node_modules \
 		--exclude venv \
+		--exclude *example* \
 		--exclude *local* \
 		--exclude *.pid \
 		--exclude *.swp \

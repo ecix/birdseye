@@ -1,4 +1,3 @@
-
 # Birdseye - Your friendly bird looking glass
 
 Birdseye is a frontend to the API exposed by 
@@ -42,7 +41,17 @@ directory.
 
 ## Configuration
 
-Edit your `/etc/birdseye/birdseye.conf` and add bird api servers:
+An example configuration can be found under
+[etc/birdseye/birdseye.example.conf](https://github.com/ecix/birdseye/blob/master/etc/birdseye/birdseye.example.conf).
+
+You can copy it to any of the following locations:
+
+    etc/birdseye/birdseye.conf # local
+    etc/birdseye/birdseye.local.conf # local as well
+    /etc/birdseye/birdseye.conf # global
+
+
+You will have to at least edit it to add bird API servers:
 
     [bird.0]
     name = rs1.example.com (IPv4)
@@ -52,7 +61,8 @@ Edit your `/etc/birdseye/birdseye.conf` and add bird api servers:
     name = rs1.example.net (IPv6)
     api = http://rs1.example.com:29185/
 
-You can edit uWSGI server settings in the same configuration file.
+You can edit uWSGI server settings and any other section
+in the same file.
 
 
 ## Running

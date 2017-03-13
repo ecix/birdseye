@@ -89,7 +89,7 @@ class RoutesTable extends React.Component {
       return (
         <tr key={r.network} onClick={() => this.showAttributesModal(r)}>
           <td>{r.network}{this.props.display_filter && <FilterReason route={r}/>}</td>
-          {Object.keys(routes_columns).map(col => <td>{_lookup(r, col)}</td>)}
+          {Object.keys(routes_columns).map(col => <td key={col}>{_lookup(r, col)}</td>)}
         </tr>
       );
     });
@@ -101,7 +101,7 @@ class RoutesTable extends React.Component {
           <thead>
             <tr>
               <th>Network</th>
-              {Object.values(routes_columns).map(col => <th>{col}</th>)}
+              {Object.values(routes_columns).map(col => <th key={col}>{col}</th>)}
             </tr>
           </thead>
           <tbody>

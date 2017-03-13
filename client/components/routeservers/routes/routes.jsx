@@ -148,7 +148,8 @@ class RoutesTables extends React.Component {
     const routes = this.props.routes[this.props.protocolId];
     const filtered = this.props.filtered[this.props.protocolId] || [];
 
-    if(!routes || routes.length == 0) {
+    if((!routes || routes.length == 0) &&
+			 (!filtered || filtered.length == 0)) {
       return(
         <p className="help-block">
           No routes matched your filter.

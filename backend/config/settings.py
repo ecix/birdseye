@@ -54,4 +54,4 @@ FRONTEND_CONFIG = {
 }
 
 # LWTS store config
-TIMESERIES_ROUTES_PATH = 'var/birdseye/timeseries/routes'
+TIMESERIES_ROUTES_PATH = config.get('timeseries', 'routes_path')

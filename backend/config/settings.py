@@ -11,7 +11,6 @@ config.read([
     '/etc/birdseye/birdseye.conf',
 ])
 
-
 # Helper
 def _parse_flags(value):
     """Parse (boolean) flags"""
@@ -40,3 +39,6 @@ FRONTEND_CONFIG = {
     "reject_reasons": REJECT_REASONS,
     "rejection": REJECTION,
 }
+
+# LWTS store config
+TIMESERIES_ROUTES_PATH = 'var/birdseye/timeseries/routes'

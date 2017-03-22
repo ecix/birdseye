@@ -2,15 +2,27 @@
 Birdseye configuration
 """
 
+import sys
+
 from configparser import ConfigParser
 
 config = ConfigParser()
-config.read([
+res = config.read([
     'etc/birdseye/birdseye.conf',
     'etc/birdseye/birdseye.local.conf',
     '/etc/birdseye/birdseye.conf',
 ])
 
+if not res:
+    print("")
+    print("-------------[Configure Me]-------------")
+    print("It looks like you are setting up your")
+    print("birdseye installation.")
+    print("")
+    print("Please find an example configuration in")
+    print("    etc/birdseye/birdseye.example.conf")
+    print("")
+    sys.exit(-1)
 
 # Helper
 def _parse_flags(value):

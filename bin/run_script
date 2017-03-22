@@ -26,4 +26,4 @@ export PYTHONPATH=backend/
 source ./venv/bin/activate
 
 # == exec file 
-exec $@
+exec python management/scripts/$@.py

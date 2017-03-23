@@ -19,6 +19,7 @@
     "babelify": "^7.3.0",
     "bootstrap": "^3.3.7",
     "browserify": "^13.1.0",
+    "chart.js": "^2.5.0",
     "cssify": "^1.0.3",
     "font-awesome": "^4.6.3",
     "gulp": "^3.9.1",

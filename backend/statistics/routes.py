@@ -17,10 +17,13 @@ def update_routeserver_routes(name, api_base):
     bird = client.Bird(api_base)
     protocols = bird.protocols()
 
+
+    # Storing p['routes'].get('exported', 0), results in
+    # a lot of fluctuating data; unsuited for our timeseries store.
+
     stats = [((name, p['neighbor_as'], p['neighbor_address']),
               (p['routes'].get('imported', 0),
                p['routes'].get('filtered', 0),
-               p['routes'].get('exported', 0),
                p['routes'].get('preferred', 0)))
              for _, p in protocols['protocols'].iteritems()]
 

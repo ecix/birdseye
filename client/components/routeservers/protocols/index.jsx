@@ -14,6 +14,9 @@ import RelativeTime from 'components/relativetime'
 
 import Spinner from 'react-spinkit'
 
+import RoutesTimeseriesView
+	from 'components/charts/routes-timeseries/view'
+
 
 function _filteredProtocols(protocols, filter) {
   let filtered = [];
@@ -102,6 +105,10 @@ class NeighboursTable extends React.Component {
 
     return (
       <div className="card">
+			 <RoutesTimeseriesView rsId={0}
+														 asn={25074}
+														 neighbourAddress="194.9.117.1" />
+
         <table className="table table-striped table-protocols">
           <thead>
             <tr>

@@ -18,6 +18,9 @@ import errorsReducer
 import configReducer
   from 'components/config/reducer'
 
+import chartsReducer
+	from 'components/charts/reducer'
+
 
 export default combineReducers({
   routeservers:       routeserversReducer,
@@ -25,5 +28,6 @@ export default combineReducers({
   routing:            routerReducer,
   errors:             errorsReducer,
   config:             configReducer,
+	charts:							chartsReducer
 });
 

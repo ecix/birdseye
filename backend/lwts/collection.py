@@ -17,7 +17,7 @@ class Collection(object):
         if not os.path.exists(self.path):
             raise ValueError('{} does not exist'.format(self.path))
 
-    def store(self, *args):
+    def store(self, *args, **kwargs):
         """Store factorty"""
-        return Store(self.path, *args)
+        return Store(self.path, *args, **kwargs)
 

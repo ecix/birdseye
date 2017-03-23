@@ -13,7 +13,7 @@ from lwts.series import Series, RawSeries
 
 class Store(object):
     """Simple store using flat csv files"""
-    def __init__(self, path, *args):
+    def __init__(self, path, *args, **kwargs):
         """
         Initialize store with path;
         derive csv filename from args.
@@ -21,6 +21,10 @@ class Store(object):
         Provide factory methods for reader
         and convinience method for adding datapoints
         """
+        # Check if we should create or throw an error
+        # if file not exists
+        strict = kwargs.get('strict', False)
+
         # Derive series filename
         filename = "_".join(str(a) for a in args)
 
@@ -29,6 +33,11 @@ class Store(object):
 
         # Initialize datafile
         self.datafile = os.path.join(path, filename)
+
+        if strict and not os.path.exists(self.datafile):
+            raise Exception("Do not create datafile in strict mode")
+
+        # Touch datafile
         open(self.datafile, 'a').close()
 
         # We will cache fetch_all and operate on the cache

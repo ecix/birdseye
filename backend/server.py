@@ -7,6 +7,8 @@ from flask import Flask, jsonify, request
 from bird import client
 from config import settings
 
+from statistics import routes as routes_stats
+from statistics import helpers as timeseries_helpers
 
 #
 # Setup and initialization
@@ -107,6 +109,21 @@ def routes(pk=None):
 @app.route('/birdseye/api/config/')
 def rejection_reasons():
     return jsonify({"config": settings.FRONTEND_CONFIG})
+
+
+#
+# Timeseries endpoints
+#
+ROUTES_TIMESERIES_ROUTE = ( '/birdseye/api/routeserver/<int:pk>'
+                            '/timeseries/routes'
+                            '/<int:asn>/<string:address>' )
+@app.route(ROUTES_TIMESERIES_ROUTE)
+def routes_timeseries(pk=None, asn=None, address=None):
+    """Fetch timeseries"""
+    series = routes_stats.fetch_series(pk, asn, address)
+    return jsonify({
+        'timeseries': timeseries_helpers.json_timeseries(series),
+    })
 
 
 #

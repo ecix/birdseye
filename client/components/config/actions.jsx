@@ -4,10 +4,13 @@ import {loadRejectReasonsSuccess} from 'components/routeservers/actions';
 
 export const LOAD_CONFIG_SUCCESS = "@birdseye/LOAD_CONFIG_SUCCESS";
 
-function loadConfigSuccess(routes_columns) {
+function loadConfigSuccess(config) {
   return {
     type: LOAD_CONFIG_SUCCESS,
-    routes_columns: routes_columns
+		payload: {
+			routes_columns: config.routes_columns,
+			routes_graphs_enabled: config.routes_graphs_enabled
+		}
   }
 }
 
@@ -20,7 +23,7 @@ export function loadConfig() {
                                    data.config.rejection.reject_id,
                                    data.config.reject_reasons)
         );
-        dispatch(loadConfigSuccess(data.config.routes_columns));
+        dispatch(loadConfigSuccess(data.config));
       })
       .catch(error => dispatch(apiError(error)));
   }

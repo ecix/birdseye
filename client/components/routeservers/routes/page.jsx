@@ -66,13 +66,14 @@ class RoutesPage extends React.Component {
             <div className="card">
               <Status routeserverId={this.props.params.routeserverId} />
             </div>
+						{this.props.graphsEnabled &&
 						<div className="card">
 							{ this.props.protocol.neighbor_as &&	
 								<RoutesTimeseriesView routeserverId={this.props.routeserverId}
 																			asn={this.props.protocol.neighbor_as}
 																			neighbourAddress={this.props.protocol.neighbor_address} />
 							}
-						</div>
+						</div>}
           </div>
         </div>
       </div>
@@ -96,7 +97,8 @@ export default connect(
     return {
 			routeserverId: routeserverId,
       routesFilterValue: state.routeservers.routesFilterValue,
-			protocol: protocol
+			protocol: protocol,
+			graphsEnabled: state.config.routes_graphs_enabled
     }
   }
 )(RoutesPage);

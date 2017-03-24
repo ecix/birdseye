@@ -69,6 +69,18 @@ class GraphLinkView extends React.Component {
 	}
 
 	render() {
+
+		if (!this.props.graphsEnabled) {
+			// Fall back to routes link
+			return (
+				<RoutesLink routeserverId={this.props.routeserverId}
+										protocol={this.props.neighbour.protocol}
+										state={this.props.neighbour.state}>{this.props.children}
+				</RoutesLink>
+			);
+		}
+
+		// Render graph link
 		return (
 			<button className="btn btn-link btn-link-inline btn-routes-graph"
 						  onClick={() => this.showModal()}>
@@ -78,10 +90,16 @@ class GraphLinkView extends React.Component {
 	}
 }
 
-const GraphLink = connect()(GraphLinkView);
+const GraphLink = connect(
+	(state) => {
+		return {
+			graphsEnabled: state.config.routes_graphs_enabled
+		}
+	}
+)(GraphLinkView);
 
 
-class NeighboursTable extends React.Component {
+class NeighboursTableView extends React.Component {
 
   render() {
     let neighbours = this.props.neighbours.map( (n) => {
@@ -118,12 +136,13 @@ class NeighboursTable extends React.Component {
               {n.routes.filtered}
             </GraphLink>
           </td>
+					{this.props.graphsEnabled &&
        	  <td>
             <GraphLink routeserverId={this.props.routeserverId}
 											 neighbour={n}>
 							<i className="fa fa-line-chart"></i>
             </GraphLink>
-          </td>
+          </td>}
         </tr>
       );
     });
@@ -151,7 +170,7 @@ class NeighboursTable extends React.Component {
               <th>Description</th>
               <th>Routes Recv.</th>
               <th>Routes Filtered</th>
-							<th></th>
+							{this.props.graphsEnabled && <th></th>}
             </tr>
           </thead>
           <tbody>
@@ -162,6 +181,14 @@ class NeighboursTable extends React.Component {
     );
   }
 }
+
+const NeighboursTable = connect(
+	(state) => {
+		return {
+			graphsEnabled: state.config.routes_graphs_enabled
+		}
+	}
+)(NeighboursTableView)
 
 
 class Protocols extends React.Component {
@@ -265,7 +292,8 @@ export default connect(
     return {
       isLoading: state.routeservers.protocolsAreLoading,
       protocols: state.routeservers.protocols,
-      filter: state.routeservers.protocolsFilterValue
+      filter: state.routeservers.protocolsFilterValue,
+			graphsEnabled: state.config.routes_graphs_enabled
     }
   }
 )(Protocols);

@@ -70,7 +70,7 @@ class GraphLinkView extends React.Component {
 
 	render() {
 		return (
-			<button className="btn btn-link"
+			<button className="btn btn-link btn-link-inline btn-routes-graph"
 						  onClick={() => this.showModal()}>
 				{this.props.children}
 			</button>
@@ -112,10 +112,16 @@ class NeighboursTable extends React.Component {
               {n.routes.imported}
             </GraphLink>
           </td>
-        <td>
+       	  <td>
             <GraphLink routeserverId={this.props.routeserverId}
 											 neighbour={n}>
               {n.routes.filtered}
+            </GraphLink>
+          </td>
+       	  <td>
+            <GraphLink routeserverId={this.props.routeserverId}
+											 neighbour={n}>
+							<i className="fa fa-line-chart"></i>
             </GraphLink>
           </td>
         </tr>
@@ -145,6 +151,7 @@ class NeighboursTable extends React.Component {
               <th>Description</th>
               <th>Routes Recv.</th>
               <th>Routes Filtered</th>
+							<th></th>
             </tr>
           </thead>
           <tbody>

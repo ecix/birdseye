@@ -64,7 +64,15 @@ class TimeseriesView extends React.Component {
             xAxes: [{
                 type: 'time',
                 position: 'bottom',
-            }]
+								time: {
+									tooltipFormat: "MMMM Do YYYY, h:mm:ss a"
+								}
+            }],
+						/*
+						yAxes: [
+							{ type: 'logarithmic' }
+						]
+						*/
         }
 		};
 

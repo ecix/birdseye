@@ -54,7 +54,8 @@ class TimeseriesView extends React.Component {
 						borderColor: "#337ab7",
 					  backgroundColor: "rgba(51, 122, 183, 0.32)",
 						fill: false,
-						borderWidth: 1.5
+						borderWidth: 1.5,
+						yAxisID: "received"
 				},
 				{
             label: 'Filtered',
@@ -63,7 +64,8 @@ class TimeseriesView extends React.Component {
 						borderColor: "#ffa500",
 						backgroundColor: "rgba(255, 165, 0, 0.32)",
 						fill: false,
-						borderWidth: 1.5
+						borderWidth: 1.5,
+						yAxisID: "filtered"
 				}]
 		};
 
@@ -76,11 +78,14 @@ class TimeseriesView extends React.Component {
 									tooltipFormat: "MMMM Do YYYY, h:mm:ss a"
 								}
             }],
-						/*
 						yAxes: [
-							{ type: 'logarithmic' }
+							{ type: 'linear', id: "received",
+								ticks: {	stepSize: 1 }
+							},
+							{ type: 'linear', id: "filtered", position: "right",
+								ticks: {	stepSize: 1 }
+							},
 						]
-						*/
         }
 		};
 

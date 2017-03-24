@@ -8,14 +8,18 @@ import {connect} from 'react-redux'
 import {loadRouteserverProtocol}
   from 'components/routeservers/actions'
 
+import {showRoutesTimeseriesModal}
+	from 'components/routeservers/routes/routes-timeseries-modal-actions'
+
+import RoutesTimeseriesModal
+	from 'components/routeservers/routes/routes-timeseries-modal'
+
+
 import {Link} from 'react-router'
 
 import RelativeTime from 'components/relativetime'
 
 import Spinner from 'react-spinkit'
-
-import RoutesTimeseriesView
-	from 'components/charts/routes-timeseries/view'
 
 
 function _filteredProtocols(protocols, filter) {
@@ -50,6 +54,33 @@ class RoutesLink extends React.Component {
   }
 }
 
+
+class GraphLinkView extends React.Component {
+	showModal() {
+		const neighbour = this.props.neighbour;
+		this.props.dispatch(
+			showRoutesTimeseriesModal(
+				this.props.routeserverId,
+				neighbour.neighbor_as,
+				neighbour.neighbor_address,
+				neighbour.description
+			)
+		);
+	}
+
+	render() {
+		return (
+			<button className="btn btn-link"
+						  onClick={() => this.showModal()}>
+				{this.props.children}
+			</button>
+		);
+	}
+}
+
+const GraphLink = connect()(GraphLinkView);
+
+
 class NeighboursTable extends React.Component {
 
   render() {
@@ -76,18 +107,16 @@ class NeighboursTable extends React.Component {
             </RoutesLink>
           </td>
           <td>
-            <RoutesLink routeserverId={this.props.routeserverId}
-                        protocol={n.protocol}
-                        state={n.state}>
+						<GraphLink routeserverId={this.props.routeserverId}
+											 neighbour={n}>
               {n.routes.imported}
-            </RoutesLink>
+            </GraphLink>
           </td>
         <td>
-            <RoutesLink routeserverId={this.props.routeserverId}
-                        protocol={n.protocol}
-                        state={n.state}>
+            <GraphLink routeserverId={this.props.routeserverId}
+											 neighbour={n}>
               {n.routes.filtered}
-            </RoutesLink>
+            </GraphLink>
           </td>
         </tr>
       );
@@ -105,9 +134,6 @@ class NeighboursTable extends React.Component {
 
     return (
       <div className="card">
-			 <RoutesTimeseriesView rsId={0}
-														 asn={25074}
-														 neighbourAddress="194.9.117.1" />
 
         <table className="table table-striped table-protocols">
           <thead>
@@ -217,8 +243,13 @@ class Protocols extends React.Component {
                                    routeserverId={this.props.routeserverId} />);
     }
 
+		console.log("ROUTES TIMESERIES MODAL:", RoutesTimeseriesModal);
+
     return (
-      <div>{tables}</div>
+      <div>
+				{tables}
+				<RoutesTimeseriesModal />
+			</div>
     );
   }
 }

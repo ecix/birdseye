@@ -21,7 +21,7 @@ class TimeseriesView extends React.Component {
 	componentDidMount() {
 		this.props.dispatch(
 			loadRoutesTimeseries(
-				this.props.rsId,
+				this.props.routeserverId,
 				this.props.asn,
 				this.props.neighbourAddress
 			)
@@ -29,13 +29,13 @@ class TimeseriesView extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (this.props.rsId != nextProps.rsId &&
+		if (this.props.routeserverId != nextProps.routeserverId &&
 				this.props.asn != nextProps.asn &&
 				this.props.neighbourAddress != nextProps.neighbourAddress ) {
 
 				this.props.dispatch(
 					loadRoutesTimeseries(
-						nextProps.rsId,
+						nextProps.routeserverId,
 						nextProps.asn,
 						nextProps.neighbourAddress
 					)
@@ -128,7 +128,7 @@ class TimeseriesView extends React.Component {
 
 export default connect(
 	(state, ownProps) => {
-		let key = `${ownProps.rsId}_${ownProps.asn}_${ownProps.neighbourAddress}`;
+		let key = `${ownProps.routeserverId}_${ownProps.asn}_${ownProps.neighbourAddress}`;
 		return {
 			timeseries: state.charts.routes.series[key],
 			isLoading:  state.charts.routes.seriesLoading[key],

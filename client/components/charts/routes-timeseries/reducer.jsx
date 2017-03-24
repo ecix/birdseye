@@ -14,7 +14,7 @@ const initialState = {
 
 // Helper
 function _keyFromPayload(payload) {
-	let key = `${payload.rsId}_${payload.asn}_${payload.neighbourAddress}`;
+	let key = `${payload.routeserverId}_${payload.asn}_${payload.neighbourAddress}`;
 	return key
 }
 

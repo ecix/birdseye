@@ -5,7 +5,7 @@ import {SHOW_ROUTES_TIMESERIES_MODAL,
 
 
 const initialState = {
-	rsId: 0,
+	routeserverId: 0,
 	asn: null,
 	neighbourAddress: null,
 

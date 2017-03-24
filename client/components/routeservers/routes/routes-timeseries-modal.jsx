@@ -35,7 +35,7 @@ class RoutesTimeseriesModal extends React.Component {
 					<h4>{this.props.title}</h4>
 				</Header>
 				<Body>
-				 <RoutesTimeseriesView rsId={this.props.rsId}
+				 <RoutesTimeseriesView routeserverId={this.props.routeserverId}
 															 asn={this.props.asn}
 															 neighbourAddress={this.props.neighbourAddress} />
 				</Body>	
@@ -48,9 +48,9 @@ export default connect(
 	(state) => {
 		return {
 			show: state.modals.routesTimeseries.show,
-			rsId: state.modals.routesTimeseries.rsId,
 			asn:  state.modals.routesTimeseries.asn,
 			title: state.modals.routesTimeseries.title,
+			routeserverId: state.modals.routesTimeseries.routeserverId,
 			neighbourAddress: state.modals.routesTimeseries.neighbourAddress,
 		}
 	}

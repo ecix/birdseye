@@ -10,11 +10,13 @@ export const LOAD_ROUTES_TIMESERIES_SUCCESS = '@charts/LOAD_ROUTES_TIMESERIES_SU
 export const LOAD_ROUTES_TIMESERIES_ERROR   = '@charts/LOAD_ROUTES_TIMESERIES_ERROR';
 
 
-export function loadRoutesTimeseriesRequest(rsId, asn, neighbourAddress) {
+export function loadRoutesTimeseriesRequest(
+	routeserverId, asn, neighbourAddress
+) {
 	return {
 		type: LOAD_ROUTES_TIMESERIES_REQUEST,
 		payload: {
-			rsId: rsId,
+			routeserverId: routeserverId,
 			asn: asn,
 			neighbourAddress: neighbourAddress
 		}
@@ -22,12 +24,14 @@ export function loadRoutesTimeseriesRequest(rsId, asn, neighbourAddress) {
 }
 
 
-export function loadRoutesTimeseriesSuccess(rsId, asn, neighbourAddress, timeseries) {
+export function loadRoutesTimeseriesSuccess(
+	routeserverId, asn, neighbourAddress, timeseries
+) {
 	return {
 		type: LOAD_ROUTES_TIMESERIES_SUCCESS,
 		payload: {
 			timeseries: timeseries,
-			rsId: rsId,
+			routeserverId: routeserverId,
 			asn: asn,
 			neighbourAddress: neighbourAddress
 		}
@@ -35,12 +39,14 @@ export function loadRoutesTimeseriesSuccess(rsId, asn, neighbourAddress, timeser
 }
 
 
-export function loadRoutesTimeseriesError(rsId, asn, neighbourAddress, error) {
+export function loadRoutesTimeseriesError(
+	routeserverId, asn, neighbourAddress, error
+) {
 	return {
 		type: LOAD_ROUTES_TIMESERIES_ERROR,
 		payload: {
 			error: error,
-			rsId: rsId,
+			routeserverId: routeserverId,
 			asn: asn,
 			neighbourAddress: neighbourAddress
 		}
@@ -48,19 +54,19 @@ export function loadRoutesTimeseriesError(rsId, asn, neighbourAddress, error) {
 }
 
 
-export function loadRoutesTimeseries(rsId, asn, neighbourAddress) {
+export function loadRoutesTimeseries(routeserverId, asn, neighbourAddress) {
 	return (dispatch) => {
-		dispatch(loadRoutesTimeseriesRequest(rsId, asn, neighbourAddress));
-		let timeseriesUrl = `/birdseye/api/routeserver/${rsId}/timeseries/routes/${asn}/${neighbourAddress}`;
+		dispatch(loadRoutesTimeseriesRequest(routeserverId, asn, neighbourAddress));
+		let timeseriesUrl = `/birdseye/api/routeserver/${routeserverId}/timeseries/routes/${asn}/${neighbourAddress}`;
 		axios.get(timeseriesUrl)
 			.then(({data}) => {
 				dispatch(loadRoutesTimeseriesSuccess(
-					rsId, asn, neighbourAddress, data['timeseries']
+					routeserverId, asn, neighbourAddress, data['timeseries']
 				));
 			})
 			.catch((error) => {
         dispatch(apiError(error));
-				dispatch(loadRoutesTimeseriesError(rsId, asn, neighbourAddress, error.data));
+				dispatch(loadRoutesTimeseriesError(routeserverId, asn, neighbourAddress, error.data));
 			});
 	}
 }

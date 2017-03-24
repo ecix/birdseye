@@ -6,6 +6,16 @@ import Chart from 'chart.js'
 
 import {loadRoutesTimeseries} from './actions'
 
+
+function _discreteTickToString(value) {
+	if (value > 0 && (value%1) == 0) {
+		return ''+value;
+	}
+
+	return '';
+}
+
+
 class TimeseriesView extends React.Component {
 
 	componentDidMount() {
@@ -80,10 +90,15 @@ class TimeseriesView extends React.Component {
             }],
 						yAxes: [
 							{ type: 'linear', id: "received",
-								ticks: {	stepSize: 1 }
+								beforeBuildTicks: (scale) => console.log(scale),
+								ticks: {
+									callback: _discreteTickToString
+								}
 							},
 							{ type: 'linear', id: "filtered", position: "right",
-								ticks: {	stepSize: 1 }
+								ticks: {
+									callback: _discreteTickToString
+								}
 							},
 						]
         }

@@ -50,6 +50,7 @@ export default connect(
 			show: state.modals.routesTimeseries.show,
 			rsId: state.modals.routesTimeseries.rsId,
 			asn:  state.modals.routesTimeseries.asn,
+			title: state.modals.routesTimeseries.title,
 			neighbourAddress: state.modals.routesTimeseries.neighbourAddress,
 		}
 	}

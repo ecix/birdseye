@@ -17,6 +17,12 @@ import BgpAttributesModal
 
 import {setRoutesFilterValue} from '../actions'
 
+import {loadRouteserverProtocol}
+  from 'components/routeservers/actions'
+
+import RoutesTimeseriesView
+	from 'components/charts/routes-timeseries/view'
+
 class RoutesPage extends React.Component {
 
   setFilter(value) {
@@ -24,6 +30,13 @@ class RoutesPage extends React.Component {
       setRoutesFilterValue(value)
     );
   }
+
+	componentDidMount() {
+		// Assert that the protocols are loaded
+		this.props.dispatch(
+			loadRouteserverProtocol(this.props.routeserverId)
+		);
+	}
 
   render() {
     return(
@@ -53,6 +66,13 @@ class RoutesPage extends React.Component {
             <div className="card">
               <Status routeserverId={this.props.params.routeserverId} />
             </div>
+						<div className="card">
+							{ this.props.protocol.neighbor_as &&	
+								<RoutesTimeseriesView routeserverId={this.props.routeserverId}
+																			asn={this.props.protocol.neighbor_as}
+																			neighbourAddress={this.props.protocol.neighbor_address} />
+							}
+						</div>
           </div>
         </div>
       </div>
@@ -63,9 +83,20 @@ class RoutesPage extends React.Component {
 
 
 export default connect(
-  (state) => {
+  (state, ownProps) => {
+		let routeserverId = parseInt(ownProps.params.routeserverId);
+
+		// Get protocol
+		let rs = state.routeservers.protocols[routeserverId];
+		let protocol = {};
+		if (rs) {
+			protocol = rs[ownProps.params.protocolId];
+		}
+
     return {
-      routesFilterValue: state.routeservers.routesFilterValue
+			routeserverId: routeserverId,
+      routesFilterValue: state.routeservers.routesFilterValue,
+			protocol: protocol
     }
   }
 )(RoutesPage);

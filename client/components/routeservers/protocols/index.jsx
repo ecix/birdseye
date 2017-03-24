@@ -250,8 +250,6 @@ class Protocols extends React.Component {
                                    routeserverId={this.props.routeserverId} />);
     }
 
-		console.log("ROUTES TIMESERIES MODAL:", RoutesTimeseriesModal);
-
     return (
       <div>
 				{tables}

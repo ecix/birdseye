@@ -13,7 +13,6 @@ import lwts
 
 def update_routeserver_routes(name, api_base):
     """Update all routes received and filtered from a RS"""
-    print("updating: {}".format(name))
     bird = client.Bird(api_base)
     protocols = bird.protocols()
 
@@ -23,11 +22,8 @@ def update_routeserver_routes(name, api_base):
 
     stats = [((name, p['neighbor_as'], p['neighbor_address']),
               (p['routes'].get('imported', 0),
-               p['routes'].get('filtered', 0),
-               p['routes'].get('preferred', 0)))
+               p['routes'].get('filtered', 0)))
              for _, p in protocols['protocols'].iteritems()]
-
-    print(stats)
 
     for key, values in stats:
         # Insert values

@@ -82,7 +82,6 @@ class TimeseriesView extends React.Component {
 
 		return(
 			<div className="routes-timeseries-chart">
-				Timeseries View... chart...
 				<canvas className="chart-view" ref={(el) => this.ctx = el}></canvas>
 			</div>
 		);

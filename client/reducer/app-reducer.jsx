@@ -9,8 +9,8 @@ import { routerReducer } from 'react-router-redux'
 import routeserversReducer
   from 'components/routeservers/reducer'
 
-import bgpAttributesModalReducer
-  from 'components/routeservers/routes/bgp-attributes-modal-reducer'
+import modalsReducer
+  from 'components/modals/reducer'
 
 import errorsReducer
   from 'components/errors/reducer'
@@ -20,10 +20,10 @@ import configReducer
 
 
 export default combineReducers({
-  routeservers:       routeserversReducer,
-  bgpAttributesModal: bgpAttributesModalReducer,
-  routing:            routerReducer,
-  errors:             errorsReducer,
-  config:             configReducer,
+  routeservers:  routeserversReducer,
+  modals:        modalsReducer,
+  routing:       routerReducer,
+  errors:        errorsReducer,
+  config:        configReducer,
 });
 

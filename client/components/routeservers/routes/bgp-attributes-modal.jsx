@@ -7,7 +7,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import Modal, {Header, Body, Footer} from 'components/modal'
+import Modal, {Header, Body, Footer} from 'components/modals/modal'
 
 import {hideBgpAttributesModal}
   from './bgp-attributes-modal-actions'
@@ -89,8 +89,8 @@ class BgpAttributesModal extends React.Component {
 export default connect(
   (state) => {
     return {
-      show: state.bgpAttributesModal.show,
-      bgpAttributes: state.bgpAttributesModal.bgpAttributes
+      show: state.modals.bgpAttributes.show,
+      bgpAttributes: state.modals.bgpAttributes.bgpAttributes
     }
   }
 )(BgpAttributesModal);

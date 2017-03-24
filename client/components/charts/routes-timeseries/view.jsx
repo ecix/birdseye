@@ -50,12 +50,20 @@ class TimeseriesView extends React.Component {
         datasets: [{
             label: 'Received',
 						data: receivedSeries,
-						steppedLine: true
+						steppedLine: true,
+						borderColor: "#337ab7",
+					  backgroundColor: "rgba(51, 122, 183, 0.32)",
+						fill: false,
+						borderWidth: 1.5
 				},
 				{
             label: 'Filtered',
 						data: filteredSeries,
-						steppedLine: true
+						steppedLine: true,
+						borderColor: "#ffa500",
+						backgroundColor: "rgba(255, 165, 0, 0.32)",
+						fill: false,
+						borderWidth: 1.5
 				}]
 		};
 

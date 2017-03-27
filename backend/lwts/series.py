@@ -24,6 +24,8 @@ class RawSeries(object):
         self.query_t0 = datetime.utcfromtimestamp(0)
         self.query_t1 = None
 
+        self.query_limit = False
+
 
     def after(self, t0):
         """Set t0 of query range"""
@@ -33,6 +35,12 @@ class RawSeries(object):
 
     def until(self, t1):
         self.query_t1 = t1
+        return self
+
+
+    def limit(self, n):
+        """Limit query to n results"""
+        self.query_limit = n
         return self
 
 
@@ -47,6 +55,12 @@ class RawSeries(object):
         num_recods = len(records)
         if not records:
             return iter([])
+
+
+        if self.query_limit:
+            # only return last n records
+            records = records[-self.query_limit:]
+
 
         return ((r.time,) + tuple(r.values) for r in records)
 

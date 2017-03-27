@@ -45,3 +45,27 @@ def test_series__iter__():
     store.destroy()
     assert row[0] == datetime.utcfromtimestamp(20)
 
+
+
+def test_raw_limiting():
+    """Test limiting"""
+    store = lwts.Collection('/tmp').store('gwb9eubd')
+    store.add(23, 42, time=datetime.utcfromtimestamp(10))
+    store.add(23, 43, time=datetime.utcfromtimestamp(20))
+    store.add(24, 44, time=datetime.utcfromtimestamp(30))
+    store.add(24, 40, time=datetime.utcfromtimestamp(40))
+
+    ts = store.raw().after(datetime.utcfromtimestamp(0))\
+                    .until(datetime.utcfromtimestamp(35))\
+                    .limit(2)
+
+
+    res = list(ts)
+    store.destroy()
+
+    assert res == [
+        (datetime.utcfromtimestamp(20), 23, 43),
+        (datetime.utcfromtimestamp(30), 24, 44),
+    ]
+
+

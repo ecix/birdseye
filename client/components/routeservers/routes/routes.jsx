@@ -7,7 +7,8 @@ import {connect} from 'react-redux'
 import {loadRouteserverRoutes, loadRouteserverRoutesFiltered} from '../actions'
 import {showBgpAttributes} from './bgp-attributes-modal-actions'
 
-import Spinner from 'react-spinkit'
+import LoadingIndicator
+	from 'components/loading-indicator/small'
 
 
 class FilterReason extends React.Component {
@@ -139,9 +140,7 @@ class RoutesTables extends React.Component {
   render() {
     if(this.props.isLoading) {
       return (
-        <div className="loading-indicator">
-          <Spinner spinnerName="circle" />
-        </div>
+				<LoadingIndicator />
       );
     }
 

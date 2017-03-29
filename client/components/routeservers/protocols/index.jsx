@@ -10,10 +10,11 @@ import {loadRouteserverProtocol}
 
 import {Link} from 'react-router'
 
-import RelativeTime from 'components/relativetime'
+import RelativeTime
+	from 'components/relativetime'
 
-import Spinner from 'react-spinkit'
-
+import LoadingIndicator
+	from 'components/loading-indicator/small'
 
 function _filteredProtocols(protocols, filter) {
   let filtered = [];
@@ -144,9 +145,7 @@ class Protocols extends React.Component {
     if(this.props.isLoading) {
       return (
         <div className="card">
-          <div className="loading-indicator">
-            <Spinner spinnerName="circle" />
-          </div>
+					<LoadingIndicator />
         </div>
       );
     }

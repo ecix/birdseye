@@ -5,7 +5,7 @@ import Spinner from 'react-spinkit'
 export default class Indicator extends React.Component {
 	render() {
 		if (this.props.show == false) {
-			return;
+			return null;
 		}
 
 		return (

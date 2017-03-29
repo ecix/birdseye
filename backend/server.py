@@ -41,6 +41,32 @@ def api_routeserver_index():
     return jsonify({"routeservers": result})
 
 
+@app.route('/birdseye/api/routeserver/<int:pk>/lookup')
+def api_routeserver_lookup(pk=None):
+    """
+    Generalized lookup endpoint:
+    For now we support a network address as query,
+    however, future features like ASN lookups should
+    be possible
+    """
+    query = request.args.get('q', None)
+    if not query:
+        return jsonify({
+            "routeserverId": pk,
+            "routes": [],
+        })
+
+    bird = client.Bird(_bird_api_base(pk))
+
+    # For now just pass it to the bird api
+    result = bird.routes_lookup_prefix(query)
+    return jsonify({
+        "routeserverId": pk,
+        "routes": result,
+    })
+
+
+
 @app.route('/birdseye/api/routeserver/<int:pk>/status/')
 def status(pk=None):
     """Get status"""

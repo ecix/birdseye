@@ -43,6 +43,10 @@ class Bird(object):
         """Get routes for neighbour"""
         return self._api_get("/routes/filtered/{}".format(protocol))
 
+    def routes_lookup_prefix(self, prefix):
+        """Get routes for prefix"""
+        return self._api_get("/routes/prefix?prefix={}".format(prefix))
+
     def tables(self):
         """Get tables"""
         return self._api_get("/symbols/tables")

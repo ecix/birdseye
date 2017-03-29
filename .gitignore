@@ -2,6 +2,8 @@
 *.pyc
 __pycache__
 
+.cache
+
 *.swp
 *.swo
 
@@ -19,3 +21,6 @@ builds/
 
 RPMS/
 BUILD-RPM/
+
+
+

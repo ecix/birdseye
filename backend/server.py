@@ -53,7 +53,7 @@ def api_routeserver_lookup(pk=None):
     if not query:
         return jsonify({
             "routeserverId": pk,
-            "routes": [],
+            "result": {},
         })
 
     bird = client.Bird(_bird_api_base(pk))
@@ -62,7 +62,7 @@ def api_routeserver_lookup(pk=None):
     result = bird.routes_lookup_prefix(query)
     return jsonify({
         "routeserverId": pk,
-        "routes": result,
+        "result": result,
     })
 
 

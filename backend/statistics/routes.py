@@ -53,7 +53,8 @@ def fetch_series(routeserver_id, asn, address):
     try:
         series = lwts.open(settings.TIMESERIES_ROUTES_PATH)\
                      .store(*key, strict=True)\
-                     .raw().after(t0)
+                     .raw().after(t0)\
+                     .limit(200)
     except:
         series = []
 

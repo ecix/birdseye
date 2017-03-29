@@ -18,11 +18,14 @@ import errorsReducer
 import configReducer
   from 'components/config/reducer'
 
+import lookupReducer
+	from 'components/lookup/reducer'
 
 export default combineReducers({
   routeservers:  routeserversReducer,
   modals:        modalsReducer,
   routing:       routerReducer,
+	lookup:				 lookupReducer,
   errors:        errorsReducer,
   config:        configReducer,
 });

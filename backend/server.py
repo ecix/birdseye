@@ -41,13 +41,13 @@ def api_routeserver_index():
     return jsonify({"routeservers": result})
 
 
-@app.route('/birdseye/api/routeserver/<int:pk>/lookup')
+@app.route('/birdseye/api/routeserver/<int:pk>/routes/lookup')
 def api_routeserver_lookup(pk=None):
     """
-    Generalized lookup endpoint:
+    Routes lookup endpoint:
     For now we support a network address as query,
     however, future features like ASN lookups should
-    be possible
+    be possible, but implemented in other endpoints
     """
     query = request.args.get('q', None)
     if not query:

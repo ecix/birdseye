@@ -7,9 +7,11 @@ export const SET_QUERY_TYPE        = "@lookup/SET_QUERY_TYPE";
 
 export const RESET = "@lookup/RESET";
 
-export const ROUTES_SEARCH_STARTED = "@lookup/ROUTES_SEARCH_STARTED";
-export const ROUTES_SEARCH_COMPLETED = "@lookup/ROUTES_SEARCH_COMPLETED";
+export const LOOKUP_STARTED   = "@lookup/LOOKUP_STARTED";
+export const LOOKUP_COMPLETED = "@lookup/LOOKUP_COMPLETED";
 
+export const ROUTES_LOOKUP_STARTED = "@lookup/ROUTES_SEARCH_STARTED";
+export const ROUTES_LOOKUP_COMPLETED = "@lookup/ROUTES_SEARCH_COMPLETED";
 
 
 /*

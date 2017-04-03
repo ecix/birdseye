@@ -9,11 +9,9 @@ export default class SearchInput extends React.Component {
          <span className="input-group-addon">
           <i className="fa fa-search"></i>
          </span>
-         <input type="text" 
+         <input type="text"
                 className="form-control"
-                value={this.props.value}
-                placeholder={this.props.placeholder}
-                onChange={this.props.onChange} />
+                {...this.props} />
       </div>
     );
   }

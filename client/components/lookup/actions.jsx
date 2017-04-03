@@ -7,11 +7,8 @@ export const SET_QUERY_TYPE        = "@lookup/SET_QUERY_TYPE";
 
 export const RESET = "@lookup/RESET";
 
-export const LOOKUP_STARTED   = "@lookup/LOOKUP_STARTED";
-export const LOOKUP_COMPLETED = "@lookup/LOOKUP_COMPLETED";
-
-export const ROUTES_LOOKUP_STARTED = "@lookup/ROUTES_SEARCH_STARTED";
-export const ROUTES_LOOKUP_COMPLETED = "@lookup/ROUTES_SEARCH_COMPLETED";
+export const LOOKUP_STARTED = "@lookup/LOOKUP_STARTED";
+export const LOOKUP_RESULTS = "@lookup/LOOKUP_RESULTS";
 
 
 /*
@@ -52,43 +49,44 @@ export function reset() {
 }
 
 
-export function routesSearchStarted(routeserverId, q) {
+export function lookupStarted(routeserverId, query) {
     return {
-        type: ROUTES_SEARCH_STARTED,
+        type: LOOKUP_STARTED,
         payload: {
             routeserverId: routeserverId,
-            search: q
+            query: query
         }
     }
 }
 
 
-export function routesSearchCompleted(routeserverId, q, result) {
+export function lookupResults(routeserverId, query, results) {
     return {
-        type: ROUTES_SEARCH_COMPLETED,
+        type: LOOKUP_RESULTS,
         payload: {
             routeserverId: routeserverId,
-            search: q,
-            result: result
+            query: query,
+            results: results
         }
     }
 }
+
 
 
 export function routesSearch(routeserverId, q) {
     return (dispatch) => {
-        dispatch(routesSearchStarted(routeserverId, q));
+        dispatch(lookupStarted(routeserverId, q));
         axios.get(`/birdseye/api/routeserver/${routeserverId}/routes/lookup?q=${q}`)
             .then((result) => {
                 let routes = result.data.result.routes;
-                dispatch(routesSearchCompleted(
+                dispatch(lookupResults(
                     routeserverId,
                     q,
                     routes
                 ));
             })
             .catch((error) => {
-                dispatch(routesSearchCompleted(
+                dispatch(lookupResults(
                     routeserverId,
                     q,
                     []

@@ -25,6 +25,7 @@ class LookupView extends React.Component {
 		);
 	}
 
+
 	render() {
         console.log(this.props);
 		return (
@@ -32,12 +33,13 @@ class LookupView extends React.Component {
                 <QueryDispatcher />
 
 				<div className="card lookup-header">
-					<SearchInput placeholder="Search for routes by entering a network address" 
-						    	 onChange={(e) => this.setQuery(e.target.value)} 
+					<SearchInput placeholder="Search for routes by entering a network address"
+						    	 onChange={(e) => this.setQuery(e.target.value)}
+                                 onKeyPress={(e) => this.handleKeyEvent(e)}
                                  disabled={this.props.isSearching}
-								 value={this.props.queryInput} />	
+								 value={this.props.queryInput} />
 				</div>
-				<LoadingIndicator show={this.props.isRunning} />	
+				<LoadingIndicator show={this.props.isRunning} />
 				<div className="lookup-results">
 
 				</div>

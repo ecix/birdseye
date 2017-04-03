@@ -52,6 +52,12 @@ class QueryDispatcher extends React.Component {
             // Debug: limit to rs20
             if (rs.id != 20) { continue; }
             console.log("DISPATCHING SEARCH FOR RS:", rs);
+            switch (this.props.queryType) {
+                case QUERY_TYPE_PREFIX:
+                    this.props.dispatch(
+                        routesSearch(rs.id, this.props.input)
+                    );
+            }
         }
     }
 

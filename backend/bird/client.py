@@ -43,6 +43,10 @@ class Bird(object):
         """Get routes for neighbour"""
         return self._api_get("/routes/filtered/{}".format(protocol))
 
+    def routes_noexport(self, protocol):
+        """Get not exported routes for neighbour by protocol"""
+        return self._api_get("/routes/noexport/{}".format(protocol))
+
     def tables(self):
         """Get tables"""
         return self._api_get("/symbols/tables")

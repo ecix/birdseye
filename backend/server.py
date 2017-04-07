@@ -92,6 +92,18 @@ def routes_filtered(pk=None):
     return jsonify(bird.routes_filtered(protocol_id))
 
 
+@app.route('/birdseye/api/routeserver/<int:pk>/routes/noexport/')
+def routes_noexport(pk=None):
+    """Get not exported routes"""
+    protocol_id = request.args.get('protocol', None)
+    if not protocol_id:
+        return jsonify({'details': 'no protocol given'}), 404
+
+    bird_api = _bird_api_base(pk)
+    bird = client.Bird(bird_api)
+    return jsonify(bird.routes_noexport(protocol_id))
+
+
 @app.route('/birdseye/api/routeserver/<int:pk>/routes/')
 def routes(pk=None):
     """Get routes for routeserver id with protocol"""

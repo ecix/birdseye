@@ -1,6 +1,10 @@
 import axios from 'axios';
 import {apiError} from 'components/errors/actions'
-import {loadRejectReasonsSuccess} from 'components/routeservers/actions';
+
+import {loadRejectReasonsSuccess}
+  from 'components/routeservers/actions'
+import {loadNoExportReasonsSuccess}
+  from 'components/routeservers/large-communities/actions'
 
 export const LOAD_CONFIG_SUCCESS = "@birdseye/LOAD_CONFIG_SUCCESS";
 
@@ -19,6 +23,9 @@ export function loadConfig() {
           loadRejectReasonsSuccess(data.config.rejection.asn,
                                    data.config.rejection.reject_id,
                                    data.config.reject_reasons)
+        );
+        dispatch(
+            loadNoExportReasonsSuccess(data.config.noexport_reasons)
         );
         dispatch(loadConfigSuccess(data.config.routes_columns));
       })

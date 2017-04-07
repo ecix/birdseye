@@ -21,6 +21,9 @@ import {LOAD_ROUTESERVERS_REQUEST,
         LOAD_REJECT_REASONS_SUCCESS}
   from './actions'
 
+import {LOAD_NOEXPORT_REASONS_SUCCESS}
+  from './large-communities/actions'
+
 const initialState = {
   all: [],
   filtered: {},
@@ -28,6 +31,7 @@ const initialState = {
   protocols: {},
   routes: {},
 
+  noexport_reasons: {},
   reject_reasons: {},
   reject_id: 0,
   asn: 0,
@@ -93,6 +97,7 @@ export default function reducer(state = initialState, action) {
         routesAreLoading: false
       });
 
+    case LOAD_NOEXPORT_REASONS_SUCCESS:
     case LOAD_REJECT_REASONS_SUCCESS:
       return Object.assign({}, state, action.payload);
 

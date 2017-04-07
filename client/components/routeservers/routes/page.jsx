@@ -58,9 +58,7 @@ class RoutesPage extends React.Component {
       </div>
     );
   }
-
 }
-
 
 export default connect(
   (state) => {

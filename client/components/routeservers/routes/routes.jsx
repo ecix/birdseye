@@ -4,14 +4,16 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 
-import {loadRouteserverRoutes, loadRouteserverRoutesFiltered} from '../actions'
+import {loadRouteserverRoutes,
+        loadRouteserverRoutesFiltered,
+        loadRouteserverRoutesNoExport} from '../actions'
 import {showBgpAttributes} from './bgp-attributes-modal-actions'
 
 import Spinner from 'react-spinkit'
 
 import FilterReason
   from 'components/routeservers/large-communities/filter-reason'
-import NoexportReason
+import NoExportReason
   from 'components/routeservers/large-communities/noexport-reason'
 
 
@@ -62,7 +64,11 @@ class RoutesTable extends React.Component {
     let routesView = routes.map((r) => {
       return (
         <tr key={r.network} onClick={() => this.showAttributesModal(r)}>
-          <td>{r.network}{this.props.display_filter && <FilterReason route={r}/>}</td>
+          <td>
+            {r.network}
+            {this.props.display_reasons && <FilterReason route={r} />}
+            {this.props.display_reasons && <NoExportReason route={r} />}
+          </td>
           {Object.keys(routes_columns).map(col => <td key={col}>{_lookup(r, col)}</td>)}
         </tr>
       );
@@ -108,6 +114,10 @@ class RoutesTables extends React.Component {
       loadRouteserverRoutesFiltered(this.props.routeserverId,
                                     this.props.protocolId)
     );
+    this.props.dispatch(
+      loadRouteserverRoutesNoExport(this.props.routeserverId,
+                                    this.props.protocolId)
+    );
   }
 
   render() {
@@ -121,6 +131,7 @@ class RoutesTables extends React.Component {
 
     const routes = this.props.routes[this.props.protocolId];
     const filtered = this.props.filtered[this.props.protocolId] || [];
+    const noexport = this.props.noexport[this.props.protocolId] || [];
 
     if((!routes || routes.length == 0) &&
 			 (!filtered || filtered.length == 0)) {
@@ -142,12 +153,13 @@ class RoutesTables extends React.Component {
 
     const filtdHeader = mkHeader("orange", "filtered");
     const recvdHeader = mkHeader("green", "accepted");
-
+    const noexHeader  = mkHeader("red", "not exported");
 
     return (
       <div>
-        <RoutesTable header={filtdHeader} routes={filtered} display_filter={true}/>
-        <RoutesTable header={recvdHeader} routes={received} display_filter={false}/>
+        <RoutesTable header={filtdHeader} routes={filtered} display_reasons={true} />
+        <RoutesTable header={recvdHeader} routes={received} display_reasons={false} />
+        <RoutesTable header={noexHeader}  routes={noexport} display_reasons={true} />
       </div>
     );
 
@@ -161,6 +173,7 @@ export default connect(
       isLoading: state.routeservers.routesAreLoading,
       routes:    state.routeservers.routes,
       filtered:  state.routeservers.filtered,
+      noexport:  state.routeservers.noexport,
     }
   }
 )(RoutesTables);

@@ -52,5 +52,6 @@ ROUTES_COLUMNS = dict(config.items('routes_columns'))
 FRONTEND_CONFIG = {
     "routes_columns": ROUTES_COLUMNS,
     "reject_reasons": REJECT_REASONS,
+    "noexport_reasons": NOEXPORT_REASONS,
     "rejection": REJECTION,
 }

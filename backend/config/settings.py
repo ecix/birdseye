@@ -46,12 +46,15 @@ UI = {k: _parse_flags(v) for k, v in dict(config.items('ui')).items()}
 
 REJECTION = dict(config.items('rejection'))
 REJECT_REASONS = dict(config.items('rejection_reasons'))
+
+NOEXPORT = dict(config.items('noexport'))
 NOEXPORT_REASONS = dict(config.items('noexport_reasons'))
 
 ROUTES_COLUMNS = dict(config.items('routes_columns'))
 FRONTEND_CONFIG = {
     "routes_columns": ROUTES_COLUMNS,
     "reject_reasons": REJECT_REASONS,
-    "noexport_reasons": NOEXPORT_REASONS,
     "rejection": REJECTION,
+    "noexport_reasons": NOEXPORT_REASONS,
+    "noexport": NOEXPORT,
 }

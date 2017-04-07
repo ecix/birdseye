@@ -25,6 +25,9 @@ export const LOAD_ROUTESERVER_ROUTES_ERROR   = '@birdseye/LOAD_ROUTESERVER_ROUTE
 export const LOAD_ROUTESERVER_ROUTES_FILTERED_REQUEST = '@birdseye/LOAD_ROUTESERVER_ROUTES_FILTERED_REQUEST';
 export const LOAD_ROUTESERVER_ROUTES_FILTERED_SUCCESS = '@birdseye/LOAD_ROUTESERVER_ROUTES_FILTERED_SUCCESS';
 
+export const LOAD_ROUTESERVER_ROUTES_NOEXPORT_REQUEST = '@birdseye/LOAD_ROUTESERVER_ROUTES_NOEXPORT_REQUEST';
+export const LOAD_ROUTESERVER_ROUTES_NOEXPORT_SUCCESS = '@birdseye/LOAD_ROUTESERVER_ROUTES_NOEXPORT_SUCCESS';
+
 export const SET_PROTOCOLS_FILTER_VALUE = '@birdseye/SET_PROTOCOLS_FILTER_VALUE';
 export const SET_ROUTES_FILTER_VALUE = '@birdseye/SET_ROUTES_FILTER_VALUE';
 
@@ -182,6 +185,43 @@ export function loadRouteserverRoutes(routeserverId, protocolId) {
           loadRouteserverRoutesSuccess(routeserverId, protocolId, data.routes)
         );
         dispatch(setRoutesFilterValue(""));
+      })
+      .catch(error => dispatch(apiError(error)));
+  }
+}
+
+export function loadRouteserverRoutesNoExportRequest(routeserverId, protocolId) {
+  return {
+    type: LOAD_ROUTESERVER_ROUTES_NOEXPORT_REQUEST,
+    payload: {
+      routeserverId: routeserverId,
+      protocolId: protocolId,
+    }
+  }
+}
+
+export function loadRouteserverRoutesNoExportSuccess(routeserverId, protocolId, routes) {
+  return {
+    type: LOAD_ROUTESERVER_ROUTES_NOEXPORT_SUCCESS,
+    payload: {
+      routeserverId: routeserverId,
+      protocolId: protocolId,
+      routes: routes
+    }
+  }
+}
+
+export function loadRouteserverRoutesNoExport(routeserverId, protocolId) {
+  return (dispatch) => {
+    dispatch(loadRouteserverRoutesNoExportRequest(
+        routeserverId, protocolId
+    ));
+
+    axios.get(`/birdseye/api/routeserver/${routeserverId}/routes/noexport/?protocol=${protocolId}`)
+      .then(({data}) => {
+        dispatch(
+          loadRouteserverRoutesNoExportSuccess(routeserverId, protocolId, data.routes)
+        );
       })
       .catch(error => dispatch(apiError(error)));
   }

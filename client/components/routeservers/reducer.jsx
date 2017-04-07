@@ -14,6 +14,9 @@ import {LOAD_ROUTESERVERS_REQUEST,
         LOAD_ROUTESERVER_ROUTES_FILTERED_REQUEST,
         LOAD_ROUTESERVER_ROUTES_FILTERED_SUCCESS,
 
+        LOAD_ROUTESERVER_ROUTES_NOEXPORT_REQUEST,
+        LOAD_ROUTESERVER_ROUTES_NOEXPORT_SUCCESS,
+
         SET_PROTOCOLS_FILTER_VALUE,
         SET_ROUTES_FILTER_VALUE,
 
@@ -27,6 +30,7 @@ import {LOAD_NOEXPORT_REASONS_SUCCESS}
 const initialState = {
   all: [],
   filtered: {},
+  noexport: {},
   details: {},
   protocols: {},
   routes: {},
@@ -96,6 +100,14 @@ export default function reducer(state = initialState, action) {
         filtered: filtered,
         routesAreLoading: false
       });
+
+    case LOAD_ROUTESERVER_ROUTES_NOEXPORT_SUCCESS:
+       var noexport = Object.assign({}, state.noexport, {
+         [action.payload.protocolId]: action.payload.routes
+       });
+       return Object.assign({}, state, {
+         noexport: noexport,
+       });
 
     case LOAD_NOEXPORT_REASONS_SUCCESS:
     case LOAD_REJECT_REASONS_SUCCESS:

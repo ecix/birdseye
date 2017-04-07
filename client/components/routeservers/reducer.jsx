@@ -18,13 +18,12 @@ import {LOAD_ROUTESERVERS_REQUEST,
         LOAD_ROUTESERVER_ROUTES_NOEXPORT_SUCCESS,
 
         SET_PROTOCOLS_FILTER_VALUE,
-        SET_ROUTES_FILTER_VALUE,
-
-        LOAD_REJECT_REASONS_REQUEST,
-        LOAD_REJECT_REASONS_SUCCESS}
+        SET_ROUTES_FILTER_VALUE}
   from './actions'
 
-import {LOAD_NOEXPORT_REASONS_SUCCESS}
+import {LOAD_REJECT_REASONS_SUCCESS,
+        LOAD_REJECT_REASONS_REQUEST,
+        LOAD_NOEXPORT_REASONS_SUCCESS}
   from './large-communities/actions'
 
 const initialState = {
@@ -36,9 +35,12 @@ const initialState = {
   routes: {},
 
   noexport_reasons: {},
+  noexport_reject_id: 0,
+  noxport_asn: 0,
+
   reject_reasons: {},
   reject_id: 0,
-  asn: 0,
+  reject_asn: 0,
 
   protocolsFilterValue: "",
   routesFilterValue: "",

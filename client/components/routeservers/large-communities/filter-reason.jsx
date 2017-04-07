@@ -27,7 +27,7 @@ export default connect(
   state => {
     return {
       reject_reasons: state.routeservers.reject_reasons,
-      asn:            state.routeservers.asn,
+      asn:            state.routeservers.reject_asn,
       reject_id:      state.routeservers.reject_id,
     }
   }

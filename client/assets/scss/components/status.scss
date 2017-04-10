@@ -1,12 +1,20 @@
 
 
 
-.routeserver-status-list {
-  .routeserver-status {
-    padding: 0px 20px;
-  }
+.page-header {
+  padding: 0px 20px;
+
   .status-name {
     font-weight: bold;
+  }
+
+  .status-protocol {
+    font-weight: bold;
+  }
+
+  .spacer {
+    font-weight: bold;
+    padding: 0px 8px;
   }
 }
 
@@ -25,12 +33,5 @@
 
   }
 }
-
-
-.details-main {
-  margin-top: 20px;
-}
-
-
 
 

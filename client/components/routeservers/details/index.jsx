@@ -2,9 +2,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-
 class Details extends React.Component {
-
   render() {
     let rsStatus = this.props.details[this.props.routeserverId];
     if (!rsStatus) {
@@ -18,12 +16,7 @@ class Details extends React.Component {
     }
 
     return (
-      <div className="routeserver-status-list">
-        <div className="routeserver-status">
-          <span className="status-name">{rs.name}</span>
-            {rsStatus.router_id && ` (${rsStatus.router_id})`}
-        </div>
-      </div>
+       <span className="status-name">{rs.name}</span>
     );
   }
 }

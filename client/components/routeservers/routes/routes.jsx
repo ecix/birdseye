@@ -70,6 +70,7 @@ class RoutesTable extends React.Component {
   render() {
     let routes = this.props.routes;
     const routes_columns = this.props.routes_columns;
+    console.log(routes_columns);
 
     routes = _filteredRoutes(routes, this.props.filter);
     if (!routes || !routes.length) {

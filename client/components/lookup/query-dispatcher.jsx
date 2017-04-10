@@ -33,7 +33,6 @@ class QueryDispatcher extends React.Component {
      * Check if our query is ready
      */
     isQueryReady() {
-        console.log("Checking state:", this.props);
         if (this.props.isRunning ||
             this.props.queryType == QUERY_TYPE_UNKNOWN) {
             return false;
@@ -44,10 +43,6 @@ class QueryDispatcher extends React.Component {
 
     executeQuery() {
         // Check if we should dispatch this query now
-        if (!this.isQueryReady()){
-            return;
-        }
-
         for (let rs of this.props.routeservers) {
             // Debug: limit to rs20
             if (rs.id != 20) { continue; }
@@ -57,33 +52,44 @@ class QueryDispatcher extends React.Component {
                     this.props.dispatch(
                         routesSearch(rs.id, this.props.input)
                     );
+                default:
+                    this.props.dispatch(
+                        dummySearch(rs.id, this.props.input)
+                    );
             }
         }
     }
 
 
     /*
-     * Handle Query Input, dispatches queryies to
+     * handle query input, dispatches queryies to
      * all routeservers.
      */
-    render() {
-        if (this.props.isRunning) {
+    componentWillReceiveProps(nextProps) {
+        console.log("RECV PROPS:", nextProps);
+        if (nextProps.isRunning) {
             return null; // Do nothing while a query is being processed
+        }
+
+        if (nextProps.shouldExecute) {
+            this.executeQuery();
+            return null;
         }
 
         // Determine query type
         let queryType = QUERY_TYPE_UNKNOWN;
-        if (this.isNetwork(this.props.input)) {
+        if (this.isNetwork(nextProps.input)) {
             queryType = QUERY_TYPE_PREFIX;
         }
 
         this.props.dispatch(setQueryType(queryType));
+    }
 
-        // For now render a big button to start the query
-        return (
-            <button onClick={() => this.executeQuery()}>Lookup</button>
-        );
-
+    /*
+     * Render anything? Nope.
+     */
+    render() {
+        return null;
     }
 }
 
@@ -97,6 +103,8 @@ export default connect(
 
             isRunning: state.lookup.queryRunning,
             isFinished: state.lookup.queryFinished,
+
+            shouldExecute: state.lookup.queryDispatch,
 
             routeserversQueue: state.lookup.routeserversQueue,
             routeservers: state.routeservers.all

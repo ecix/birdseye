@@ -6,6 +6,7 @@ export const SET_QUERY_VALUE       = "@lookup/SET_QUERY_VALUE";
 export const SET_QUERY_TYPE        = "@lookup/SET_QUERY_TYPE";
 
 export const RESET = "@lookup/RESET";
+export const EXECUTE = "@lookup/EXECUTE";
 
 export const LOOKUP_STARTED = "@lookup/LOOKUP_STARTED";
 export const LOOKUP_RESULTS = "@lookup/LOOKUP_RESULTS";
@@ -16,6 +17,7 @@ export const LOOKUP_RESULTS = "@lookup/LOOKUP_RESULTS";
  */
 
 export function setQueryInputValue(q) {
+    if(!q) { q = ''; }
 	return {
 		type: SET_QUERY_INPUT_VALUE,
 		payload: {
@@ -45,6 +47,12 @@ export function setQueryType(type) {
 export function reset() {
     return {
         type: RESET
+    }
+}
+
+export function execute() {
+    return {
+        type: EXECUTE
     }
 }
 

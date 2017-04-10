@@ -4,7 +4,10 @@ import {SET_QUERY_TYPE,
         SET_QUERY_INPUT_VALUE,
 
         LOOKUP_STARTED,
-        LOOKUP_RESULTS}
+        LOOKUP_RESULTS,
+
+        RESET,
+        EXECUTE}
   from './actions'
 
 import {QUERY_TYPE_UNKNOWN} from './query'
@@ -20,7 +23,8 @@ const initialState = {
     queryType: QUERY_TYPE_UNKNOWN,
 
     queryRunning: false,
-    queryFinished: false
+    queryFinished: false,
+    queryDispatch: false,
 };
 
 
@@ -42,7 +46,8 @@ function _lookupStarted(state, lookup) {
         queue: queue,
         results: results,
 
-        queryRunning: true
+        queryRunning: true,
+        queryFinished: false,
     };
 }
 
@@ -51,13 +56,20 @@ function _lookupStarted(state, lookup) {
 function _lookupResults(state, lookup) {
     // Dequeue routeserver
     let queue = new Set(state.queue);
+    let currentQueueSize = queue.size;
     queue.delete(lookup.routeserverId);
 
     // Any routeservers left in the queue?
     let isRunning = true;
-    if(queue.size == 0) {
+    if (queue.size == 0) {
         isRunning = false;
     }
+
+    let isFinished = false;
+    if (queue.size == 0 && currentQueueSize > 0) {
+        isFinished = true;
+    }
+
 
     // Update results set
     let results = Object.assign({}, state.results, {
@@ -68,7 +80,8 @@ function _lookupResults(state, lookup) {
     return {
         results: results,
         queue: queue,
-        queryRunning: isRunning
+        queryRunning: isRunning,
+        queryFinished: isFinished
     }
 }
 
@@ -85,11 +98,21 @@ export default function reducer(state=initialState, action) {
         // Search
         case LOOKUP_STARTED:
             // Update state on lookup started
-            return Object.assign({}, state, _lookupStarted(state, payload));
+            return Object.assign({}, state, _lookupStarted(state, payload), {
+                queryDispatch: false,
+            });
 
         case LOOKUP_RESULTS:
             // Update state when we receive results
             return Object.assign({}, state, _lookupResults(state, payload));
+
+        case EXECUTE:
+            return Object.assign({}, state, {
+                queryDispatch: true,
+            });
+
+        case RESET:
+            return Object.assign({}, state, initialState);
 	}
 	return state;
 }

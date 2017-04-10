@@ -19,7 +19,6 @@ class ProtocolName extends React.Component {
 
 export default connect(
     (state, props) => {
-        console.log(props);
         let rsProtocols = state.routeservers.protocols[props.routeserverId]||{};
         let protocol = rsProtocols[props.protocolId]||{};
         return {

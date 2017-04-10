@@ -70,6 +70,10 @@ class NeighboursTable extends React.Component {
                         protocol={n.protocol}
                         state={n.state}>
               {n.description}
+              {n.state != "up" && n.last_error &&
+                <span className="protocol-state-error">
+                    {n.last_error}
+                </span>}
             </RoutesLink>
           </td>
           <td>

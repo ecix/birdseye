@@ -23,5 +23,6 @@ RPMS/
 BUILD-RPM/
 
 
-
 var/
+
+etc/birdseye/*.conf

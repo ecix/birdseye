@@ -8,6 +8,9 @@ import Details    from '../details'
 import Status     from '../status'
 import PageHeader from 'components/page-header'
 
+import ProtocolName
+  from 'components/routeservers/protocols/name'
+
 import Routes     from './routes'
 
 import SearchInput from 'components/search-input'
@@ -15,13 +18,24 @@ import SearchInput from 'components/search-input'
 import BgpAttributesModal
   from './bgp-attributes-modal'
 
-import {setRoutesFilterValue} from '../actions'
+// Actions
+import {setRoutesFilterValue}
+  from '../actions'
+import {loadRouteserverProtocol}
+  from 'components/routeservers/actions'
 
 class RoutesPage extends React.Component {
 
   setFilter(value) {
     this.props.dispatch(
       setRoutesFilterValue(value)
+    );
+  }
+
+  componentDidMount() {
+    // Assert protocols for RS are loaded
+    this.props.dispatch(
+      loadRouteserverProtocol(parseInt(this.props.params.routeserverId))
     );
   }
 
@@ -32,6 +46,9 @@ class RoutesPage extends React.Component {
           <Link to={`/routeservers/${this.props.params.routeserverId}`}>
             <Details routeserverId={this.props.params.routeserverId} />
           </Link>
+          <span className="spacer">&raquo;</span>
+          <ProtocolName routeserverId={this.props.params.routeserverId}
+                        protocolId={this.props.params.protocolId} />
         </PageHeader>
 
         <BgpAttributesModal />

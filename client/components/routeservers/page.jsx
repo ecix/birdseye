@@ -30,7 +30,7 @@ class RouteserversPage extends React.Component {
         <div className="row details-main">
           <div className="col-md-8">
             <div className="card">
-              <SearchInput 
+              <SearchInput
                 value={this.props.protocolsFilterValue}
                 placeholder="Filter by Neighbour, ASN or Description"
                 onChange={(e) => this.setFilter(e.target.value)}
@@ -41,11 +41,10 @@ class RouteserversPage extends React.Component {
           </div>
           <div className="col-md-4">
             <div className="card">
-              <Status routeserverId={this.props.params.routeserverId} /> 
+              <Status routeserverId={this.props.params.routeserverId} />
             </div>
           </div>
         </div>
-     
       </div>
     );
   }

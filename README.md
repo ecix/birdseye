@@ -39,6 +39,12 @@ For systemwide deployment it is advised to add the contents
 of the local `etc/` to your system's `/etc`
 directory.
 
+
+### Debian / Ubuntu
+
+You need to have `python`, `python-dev` and `gcc` installed for uwsgi to compile.
+
+
 ## Configuration
 
 An example configuration can be found under

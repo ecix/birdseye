@@ -43,6 +43,7 @@ directory.
 ### Debian / Ubuntu
 
 You need to have `python`, `python-dev` and `gcc` installed for uwsgi to compile.
+Also you need `curl` for downloading the prebuild UI.
 
 
 ## Configuration
